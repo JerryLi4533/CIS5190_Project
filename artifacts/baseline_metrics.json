@@ -1,0 +1,34 @@
+{
+  "dataset_path": "C:\\Users\\jerry\\Documents\\UPenn\\CIS 5190\\project\\news-source-classification\\data\\raw\\url_with_headlines.csv",
+  "num_examples": 3805,
+  "train_examples": 3044,
+  "val_examples": 761,
+  "best_val_accuracy": 0.7293035479632063,
+  "classification_report": {
+    "FoxNews": {
+      "precision": 0.7214611872146118,
+      "recall": 0.79,
+      "f1-score": 0.7541766109785203,
+      "support": 400.0
+    },
+    "NBC": {
+      "precision": 0.739938080495356,
+      "recall": 0.6620498614958449,
+      "f1-score": 0.6988304093567251,
+      "support": 361.0
+    },
+    "accuracy": 0.7293035479632063,
+    "macro avg": {
+      "precision": 0.7306996338549839,
+      "recall": 0.7260249307479225,
+      "f1-score": 0.7265035101676227,
+      "support": 761.0
+    },
+    "weighted avg": {
+      "precision": 0.7302261786395116,
+      "recall": 0.7293035479632063,
+      "f1-score": 0.7279217111290223,
+      "support": 761.0
+    }
+  }
+}
