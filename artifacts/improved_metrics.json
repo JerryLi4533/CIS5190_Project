@@ -12,37 +12,39 @@
     "val_examples": 761
   },
   "model": {
-    "features": "TF-IDF word unigrams and bigrams",
-    "max_features": 15000,
+    "features": "TF-IDF word unigrams/bigrams plus character 3-5 n-grams",
+    "word_max_features": 10000,
+    "char_max_features": 15000,
+    "total_features": 25000,
     "classifier": "LogisticRegression exported to PyTorch Linear",
-    "C": 8.0,
+    "C": 2.0,
     "class_weight": "balanced"
   },
-  "validation_accuracy": 0.8107752956636005,
+  "validation_accuracy": 0.812089356110381,
   "classification_report": {
     "FoxNews": {
-      "precision": 0.8018867924528302,
-      "recall": 0.85,
-      "f1-score": 0.8252427184466019,
+      "precision": 0.7927107061503417,
+      "recall": 0.87,
+      "f1-score": 0.8295589988081049,
       "support": 400.0
     },
     "NBC": {
-      "precision": 0.8219584569732937,
-      "recall": 0.7673130193905817,
-      "f1-score": 0.7936962750716332,
+      "precision": 0.8385093167701864,
+      "recall": 0.7479224376731302,
+      "f1-score": 0.7906295754026355,
       "support": 361.0
     },
-    "accuracy": 0.8107752956636005,
+    "accuracy": 0.812089356110381,
     "macro avg": {
-      "precision": 0.811922624713062,
-      "recall": 0.8086565096952909,
-      "f1-score": 0.8094694967591176,
+      "precision": 0.815610011460264,
+      "recall": 0.8089612188365651,
+      "f1-score": 0.8100942871053702,
       "support": 761.0
     },
     "weighted avg": {
-      "precision": 0.811408304794338,
-      "recall": 0.8107752956636005,
-      "f1-score": 0.8102778484618928,
+      "precision": 0.8144364596769698,
+      "recall": 0.812089356110381,
+      "f1-score": 0.8110918216078757,
       "support": 761.0
     }
   },
@@ -52,12 +54,12 @@
   ],
   "confusion_matrix": [
     [
-      340,
-      60
+      348,
+      52
     ],
     [
-      84,
-      277
+      91,
+      270
     ]
   ]
 }
