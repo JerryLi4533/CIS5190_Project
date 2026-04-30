@@ -1,0 +1,63 @@
+{
+  "dataset_path": "/Users/Angie/Desktop/CIS5190_Project/data/raw/url_with_headlines.csv",
+  "num_examples": 3805,
+  "label_counts": {
+    "FoxNews": 2000,
+    "NBC": 1805
+  },
+  "validation_split": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "train_examples": 3044,
+    "val_examples": 761
+  },
+  "model": {
+    "features": "TF-IDF word unigrams and bigrams",
+    "max_features": 15000,
+    "classifier": "LogisticRegression exported to PyTorch Linear",
+    "C": 8.0,
+    "class_weight": "balanced"
+  },
+  "validation_accuracy": 0.8107752956636005,
+  "classification_report": {
+    "FoxNews": {
+      "precision": 0.8018867924528302,
+      "recall": 0.85,
+      "f1-score": 0.8252427184466019,
+      "support": 400.0
+    },
+    "NBC": {
+      "precision": 0.8219584569732937,
+      "recall": 0.7673130193905817,
+      "f1-score": 0.7936962750716332,
+      "support": 361.0
+    },
+    "accuracy": 0.8107752956636005,
+    "macro avg": {
+      "precision": 0.811922624713062,
+      "recall": 0.8086565096952909,
+      "f1-score": 0.8094694967591176,
+      "support": 761.0
+    },
+    "weighted avg": {
+      "precision": 0.811408304794338,
+      "recall": 0.8107752956636005,
+      "f1-score": 0.8102778484618928,
+      "support": 761.0
+    }
+  },
+  "confusion_matrix_labels": [
+    "FoxNews",
+    "NBC"
+  ],
+  "confusion_matrix": [
+    [
+      340,
+      60
+    ],
+    [
+      84,
+      277
+    ]
+  ]
+}

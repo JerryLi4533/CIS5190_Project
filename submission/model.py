@@ -5,7 +5,7 @@ from typing import Iterable, List
 import torch
 from torch import nn
 
-NUM_FEATURES = 4096
+NUM_FEATURES = 15000
 NUM_CLASSES = 2
 LABELS = ["FoxNews", "NBC"]
 
@@ -16,7 +16,7 @@ class Model(nn.Module):
         self.linear = nn.Linear(NUM_FEATURES, NUM_CLASSES)
 
     def forward(self, batch: torch.Tensor) -> torch.Tensor:
-        return self.linear(batch)
+        return self.linear(batch.float())
 
     def predict(self, batch: Iterable[torch.Tensor]) -> List[str]:
         if isinstance(batch, torch.Tensor):
