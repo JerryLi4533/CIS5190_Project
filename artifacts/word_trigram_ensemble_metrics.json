@@ -1,0 +1,552 @@
+{
+  "dataset_path": "C:\\Users\\User\\Desktop\\image\\CIS5190_Project\\data\\raw\\url_with_headlines.csv",
+  "dataset": {
+    "input_examples": 3805,
+    "used_examples": 3799,
+    "blank_examples": 4,
+    "dropped_blank_examples": 4,
+    "conflicting_duplicate_examples": 0,
+    "duplicate_headline_examples": 2,
+    "dropped_duplicate_headline_examples": 2,
+    "label_counts": {
+      "FoxNews": 2000,
+      "NBC": 1799
+    }
+  },
+  "validation_dataset_path": null,
+  "validation_dataset": null,
+  "selection_metric": "threshold_accuracy",
+  "best_model": {
+    "default_accuracy": 0.8260068439062911,
+    "threshold_accuracy": 0.8312713872071598,
+    "default_macro_f1": 0.8251235192643533,
+    "threshold_macro_f1": 0.830839308043875,
+    "default_weighted_f1": 0.8257811053866849,
+    "threshold_weighted_f1": 0.8312916409179387,
+    "roc_auc": 0.9037434685936632,
+    "threshold": -0.04404556179129426,
+    "classification_report": {
+      "FoxNews": {
+        "precision": 0.8412857860371673,
+        "recall": 0.8375,
+        "f1-score": 0.839388624404911,
+        "support": 2000.0
+      },
+      "NBC": {
+        "precision": 0.8202433628318584,
+        "recall": 0.8243468593663146,
+        "f1-score": 0.8222899916828389,
+        "support": 1799.0
+      },
+      "accuracy": 0.8312713872071598,
+      "macro avg": {
+        "precision": 0.8307645744345129,
+        "recall": 0.8309234296831574,
+        "f1-score": 0.830839308043875,
+        "support": 3799.0
+      },
+      "weighted avg": {
+        "precision": 0.8313212376438136,
+        "recall": 0.8312713872071598,
+        "f1-score": 0.8312916409179387,
+        "support": 3799.0
+      }
+    },
+    "confusion_matrix_labels": [
+      "FoxNews",
+      "NBC"
+    ],
+    "confusion_matrix": [
+      [
+        1675,
+        325
+      ],
+      [
+        316,
+        1483
+      ]
+    ],
+    "ensemble_name": "svc_035_045_060",
+    "validation_protocol": "stratified_cv",
+    "feature_config": {
+      "word_max_features": 20000,
+      "char_max_features": 30000,
+      "word_ngram_range": [
+        1,
+        3
+      ],
+      "char_ngram_range": [
+        3,
+        5
+      ],
+      "min_df": 1,
+      "sublinear_tf": true
+    },
+    "classifier_configs": [
+      {
+        "kind": "linearsvc",
+        "c": 0.35,
+        "class_weight": "balanced"
+      },
+      {
+        "kind": "linearsvc",
+        "c": 0.45,
+        "class_weight": "balanced"
+      },
+      {
+        "kind": "linearsvc",
+        "c": 0.6,
+        "class_weight": "balanced"
+      }
+    ]
+  },
+  "final_export": {
+    "num_features": 50000,
+    "threshold_exported_as_bias_shift": -0.04404556179129426,
+    "weights_path": "C:\\Users\\User\\Desktop\\image\\CIS5190_Project\\artifacts\\model.pt",
+    "model_path": "C:\\Users\\User\\Desktop\\image\\CIS5190_Project\\submission\\model.py",
+    "preprocess_path": "C:\\Users\\User\\Desktop\\image\\CIS5190_Project\\submission\\preprocess.py"
+  },
+  "all_results": [
+    {
+      "default_accuracy": 0.8260068439062911,
+      "threshold_accuracy": 0.8312713872071598,
+      "default_macro_f1": 0.8251235192643533,
+      "threshold_macro_f1": 0.830839308043875,
+      "default_weighted_f1": 0.8257811053866849,
+      "threshold_weighted_f1": 0.8312916409179387,
+      "roc_auc": 0.9037434685936632,
+      "threshold": -0.04404556179129426,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8412857860371673,
+          "recall": 0.8375,
+          "f1-score": 0.839388624404911,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8202433628318584,
+          "recall": 0.8243468593663146,
+          "f1-score": 0.8222899916828389,
+          "support": 1799.0
+        },
+        "accuracy": 0.8312713872071598,
+        "macro avg": {
+          "precision": 0.8307645744345129,
+          "recall": 0.8309234296831574,
+          "f1-score": 0.830839308043875,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8313212376438136,
+          "recall": 0.8312713872071598,
+          "f1-score": 0.8312916409179387,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1675,
+          325
+        ],
+        [
+          316,
+          1483
+        ]
+      ],
+      "ensemble_name": "svc_035_045_060",
+      "validation_protocol": "stratified_cv",
+      "feature_config": {
+        "word_max_features": 20000,
+        "char_max_features": 30000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true
+      },
+      "classifier_configs": [
+        {
+          "kind": "linearsvc",
+          "c": 0.35,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.45,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.6,
+          "class_weight": "balanced"
+        }
+      ]
+    },
+    {
+      "default_accuracy": 0.8254803895762043,
+      "threshold_accuracy": 0.8310081600421163,
+      "default_macro_f1": 0.8245943922424602,
+      "threshold_macro_f1": 0.8306236822587232,
+      "default_weighted_f1": 0.8252539680353586,
+      "threshold_weighted_f1": 0.831050643775088,
+      "roc_auc": 0.9037518065591994,
+      "threshold": -0.05002315634448838,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.842929292929293,
+          "recall": 0.8345,
+          "f1-score": 0.8386934673366834,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8180318856514568,
+          "recall": 0.8271261812117843,
+          "f1-score": 0.8225538971807629,
+          "support": 1799.0
+        },
+        "accuracy": 0.8310081600421163,
+        "macro avg": {
+          "precision": 0.8304805892903748,
+          "recall": 0.8308130906058921,
+          "f1-score": 0.8306236822587232,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8311392335208099,
+          "recall": 0.8310081600421163,
+          "f1-score": 0.831050643775088,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1669,
+          331
+        ],
+        [
+          311,
+          1488
+        ]
+      ],
+      "ensemble_name": "svc_040_045_050",
+      "validation_protocol": "stratified_cv",
+      "feature_config": {
+        "word_max_features": 20000,
+        "char_max_features": 30000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true
+      },
+      "classifier_configs": [
+        {
+          "kind": "linearsvc",
+          "c": 0.4,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.45,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.5,
+          "class_weight": "balanced"
+        }
+      ]
+    },
+    {
+      "default_accuracy": 0.8257436167412477,
+      "threshold_accuracy": 0.830744932877073,
+      "default_macro_f1": 0.8248523569952142,
+      "threshold_macro_f1": 0.8303641090024925,
+      "default_weighted_f1": 0.8255134020467003,
+      "threshold_weighted_f1": 0.8307893623291072,
+      "roc_auc": 0.9037265147304057,
+      "threshold": -0.047010136492175975,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8428499242041435,
+          "recall": 0.834,
+          "f1-score": 0.8384016084443328,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8175824175824176,
+          "recall": 0.8271261812117843,
+          "f1-score": 0.8223266095606521,
+          "support": 1799.0
+        },
+        "accuracy": 0.830744932877073,
+        "macro avg": {
+          "precision": 0.8302161708932805,
+          "recall": 0.8305630906058921,
+          "f1-score": 0.8303641090024925,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8308846058539237,
+          "recall": 0.830744932877073,
+          "f1-score": 0.8307893623291072,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1668,
+          332
+        ],
+        [
+          311,
+          1488
+        ]
+      ],
+      "ensemble_name": "svc_035_040_045",
+      "validation_protocol": "stratified_cv",
+      "feature_config": {
+        "word_max_features": 20000,
+        "char_max_features": 30000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true
+      },
+      "classifier_configs": [
+        {
+          "kind": "linearsvc",
+          "c": 0.35,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.4,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.45,
+          "class_weight": "balanced"
+        }
+      ]
+    },
+    {
+      "default_accuracy": 0.8252171624111608,
+      "threshold_accuracy": 0.830744932877073,
+      "default_macro_f1": 0.8243625478479026,
+      "threshold_macro_f1": 0.830338235585216,
+      "default_weighted_f1": 0.8250107649317324,
+      "threshold_weighted_f1": 0.830777731045771,
+      "roc_auc": 0.9037206781545304,
+      "threshold": -0.04776995493430266,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8418136020151133,
+          "recall": 0.8355,
+          "f1-score": 0.8386449184441657,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.818632855567806,
+          "recall": 0.8254585881045025,
+          "f1-score": 0.8220315527262663,
+          "support": 1799.0
+        },
+        "accuracy": 0.830744932877073,
+        "macro avg": {
+          "precision": 0.8302232287914597,
+          "recall": 0.8304792940522512,
+          "f1-score": 0.830338235585216,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8308364599096366,
+          "recall": 0.830744932877073,
+          "f1-score": 0.830777731045771,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1671,
+          329
+        ],
+        [
+          314,
+          1485
+        ]
+      ],
+      "ensemble_name": "svc_040_045_050_060",
+      "validation_protocol": "stratified_cv",
+      "feature_config": {
+        "word_max_features": 20000,
+        "char_max_features": 30000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true
+      },
+      "classifier_configs": [
+        {
+          "kind": "linearsvc",
+          "c": 0.4,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.45,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.5,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.6,
+          "class_weight": "balanced"
+        }
+      ]
+    },
+    {
+      "default_accuracy": 0.8257436167412477,
+      "threshold_accuracy": 0.8304817057120295,
+      "default_macro_f1": 0.8248915763182403,
+      "threshold_macro_f1": 0.8300699735897346,
+      "default_weighted_f1": 0.8255378409409743,
+      "threshold_weighted_f1": 0.8305125305768002,
+      "roc_auc": 0.9036881600889383,
+      "threshold": -0.047708500521460875,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8413897280966768,
+          "recall": 0.8355,
+          "f1-score": 0.8384345208228801,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8185328185328186,
+          "recall": 0.8249027237354085,
+          "f1-score": 0.8217054263565892,
+          "support": 1799.0
+        },
+        "accuracy": 0.8304817057120295,
+        "macro avg": {
+          "precision": 0.8299612733147477,
+          "recall": 0.8302013618677042,
+          "f1-score": 0.8300699735897346,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8305659375451157,
+          "recall": 0.8304817057120295,
+          "f1-score": 0.8305125305768002,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1671,
+          329
+        ],
+        [
+          315,
+          1484
+        ]
+      ],
+      "ensemble_name": "svc_035_040_045_050_060_075",
+      "validation_protocol": "stratified_cv",
+      "feature_config": {
+        "word_max_features": 20000,
+        "char_max_features": 30000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true
+      },
+      "classifier_configs": [
+        {
+          "kind": "linearsvc",
+          "c": 0.35,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.4,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.45,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.5,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.6,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.75,
+          "class_weight": "balanced"
+        }
+      ]
+    }
+  ]
+}

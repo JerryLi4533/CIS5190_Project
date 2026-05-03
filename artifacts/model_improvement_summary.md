@@ -2,26 +2,29 @@
 
 ## Final Selected Model
 
-- Model: LinearSVC with C=0.45 and class_weight=balanced
-- Features: TF-IDF word 1-3 n-grams plus character 3-5 n-grams
-- Vocabulary: 20,000 word features + 30,000 character features
+- Model: linearsvc with C=1.5 and class_weight=balanced
+- Features: TF-IDF word [1, 3] n-grams plus character [2, 5] n-grams
+- Vocabulary: 30000 word features + 50000 character features
 - TF scaling: sublinear_tf=True
-- Threshold: -0.042281
+- Text mode: headline_url_slug
+- Threshold: -0.151807
 
 ## Evaluation Protocol
 
-- Selection metric: 5-fold cross-validated accuracy, matching the course leaderboard metric
+- Selection metric: holdout accuracy on the separate validation CSV, using the training CSV only for fitting
 - Diagnostic metrics: macro F1, weighted F1, per-class precision/recall/F1, confusion matrix, ROC-AUC
-- Dataset used after cleaning: 3,799 examples
-- Dropped examples: 4 blank headlines and 2 duplicate headlines
+- Training dataset used after cleaning: 3805 examples
+- Validation dataset used after cleaning: 393 examples
+- Dropped examples: 0 blank headlines and 0 duplicate headlines
 
-## Cross-Validated Results
+## Holdout Validation Results
 
-- Accuracy: 0.8313
-- Macro F1: 0.8308
-- Weighted F1: 0.8313
-- FoxNews precision/recall/F1: 0.8406 / 0.8385 / 0.8395
-- NBC precision/recall/F1: 0.8210 / 0.8232 / 0.8221
+- Accuracy: 0.9364
+- Macro F1: 0.9355
+- Weighted F1: 0.9361
+- ROC-AUC: 0.9825
+- FoxNews precision/recall/F1: 0.9159 / 0.9718 / 0.9431
+- NBC precision/recall/F1: 0.9641 / 0.8944 / 0.9280
 
 ## Confusion Matrix
 
@@ -29,15 +32,16 @@ Rows are true labels and columns are predicted labels.
 
 | True label | Pred FoxNews | Pred NBC |
 | --- | ---: | ---: |
-| FoxNews | 1677 | 323 |
-| NBC | 318 | 1481 |
+| FoxNews | 207 | 6 |
+| NBC | 19 | 161 |
 
 ## Main Improvements
 
 - Replaced the fixed single-split experiment with 5-fold stratified cross-validation.
 - Switched the best classifier from Logistic Regression to LinearSVC after empirical comparison.
 - Increased TF-IDF capacity and added word trigrams while keeping character n-grams.
+- Added optional URL-slug text features with source domains stripped.
 - Applied the same text cleaning during training and submission preprocessing.
 - Removed blank and duplicate cleaned headlines from training.
-- Tuned the decision threshold on out-of-fold scores to improve final accuracy.
+- Tuned the decision threshold on held-out validation scores to improve final accuracy.
 - Added macro F1, weighted F1, ROC-AUC, and confusion-matrix diagnostics for reporting while keeping accuracy as the final selection target.

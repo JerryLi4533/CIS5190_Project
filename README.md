@@ -63,7 +63,35 @@ To refine the current best word-trigram LinearSVC model around nearby `C` values
 python scripts/train_model_search.py --refine-word-trigrams-svc --svc-c-values 0.35 0.4 0.45 0.5 0.6 0.75
 ```
 
+To run a larger focused TF-IDF search:
+
+```powershell
+python scripts/train_model_search.py --expanded-tfidf
+```
+
+To include URL slug tokens with source domains stripped:
+
+```powershell
+python scripts/train_model_search.py --expanded-tfidf --text-mode headline_url_slug
+```
+
+To evaluate against a separate pseudo-hidden validation CSV instead of random CV, and export the current leaderboard-oriented model:
+
+```powershell
+python scripts/train_model_search.py --expanded-tfidf --text-mode headline_url_slug --validation-csv data/raw/recent_validation.csv --expanded-c-values 1.5
+```
+
+To try same-feature LinearSVC ensembles that still export as one evaluator-compatible linear model:
+
+```powershell
+python scripts/train_word_trigram_ensemble.py
+```
+
 Each search writes detailed metrics to `artifacts/model_search_metrics.json` and a report-ready summary to `artifacts/model_improvement_summary.md`.
+
+The exported preprocessing accepts `headline`, `scraped_headline`, `alternative_headline`, or `title` columns, matching the representative Project B screenshots in the guideline.
+
+Current exported result: 93.64% accuracy on the no-overlap post-January-2026 validation CSV, using URL slug tokens with direct source-domain tokens stripped.
 
 If you want to scrape more article titles from a URL list:
 
