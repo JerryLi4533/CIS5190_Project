@@ -1,0 +1,125 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools,bbm}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{algorithmicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+\usepackage[noabbrev]{cleveref}
+\usepackage{courier}
+\usepackage{enumitem}
+\usepackage[parfill]{parskip}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+
+
+
+\setlist[itemize]{itemsep=.01cm, topsep=.01cm}
+\setlist[enumerate]{itemsep=.01cm, topsep=.01cm}
+
+
+\oddsidemargin 0in
+\evensidemargin 0in
+\textwidth 6.5in
+\topmargin -0.5in
+\textheight 9.0in
+\setlength{\parskip}{8pt}
+
+\newcommand{\head}[4]{
+\thispagestyle{plain}
+\newpage
+\setcounter{page}{1}
+\noindent
+\begin{center}
+\framebox{ \vbox{ \hbox to 6.28in
+{CIS 4190/5190: Applied Machine Learning \hfill #1}
+\vspace{4mm}
+\hbox to 6.28in
+{\hspace{2.5in}\large\bf\mbox{#2}\hfill}
+\vspace{4mm}
+\hbox to 6.28in
+{{\it #3 \hfill #4}}
+}}
+\end{center}
+}
+
+
+
+\begin{document}
+\head{Spring 2026}{[Report Title]}{Team Members: Jerry Li, Yikai Ding, Jier Yin}{Project: News Source Classification}
+
+\section{Introduction}
+This project studies binary news source classification: given only the headline of a news article, the goal is to predict whether it was published by Fox News or NBC News. The task is challenging because headlines are short, often refer to overlapping events and public figures, and provide only limited context beyond wording, framing, and editorial style.
+
+Our approach builds a reproducible text classification pipeline around cleaned headline text, TF-IDF word and character n-gram features, and linear classifiers. We iteratively compared baseline and improved models, selected the final model using accuracy-focused validation, and exported the resulting classifier into the required Project B submission format. Beyond leaderboard performance, our experiments focus on understanding which text features and modeling choices are most useful for headline-only source prediction.
+
+\section{Core Components}
+
+\subsection{Data Collection and Dataset}
+We used the provided Project B URL dataset as the starting point and constructed a headline classification dataset from Fox News and NBC News articles. Each example contains a URL and its corresponding headline, and the label is inferred from the source domain. The final raw dataset contains 3,805 examples: 2,000 from Fox News and 1,805 from NBC News. During training experiments, we standardized text by lowercasing, normalizing whitespace, and replacing common typographic variants such as curly quotes and dashes. For the final cross-validation experiments, we removed 4 blank headlines and 2 duplicate cleaned headlines, leaving 3,799 usable examples.
+
+For early experiments, we used an 80/20 stratified train-validation split with random seed 42 so that both classes were represented proportionally. For final model selection, we moved to 5-fold stratified cross-validation, which gives a more stable estimate on a relatively small dataset and better matches the leaderboard goal of generalizing to unseen headlines.
+
+\subsection{Model Design}
+Our first implementation was a simple linear PyTorch classifier trained with cross-entropy loss. This model served as a local baseline and verified that the preprocessing, model, and evaluator interfaces worked end-to-end. We then switched to sparse TF-IDF features and linear classifiers, which are well suited to short text classification because they can capture topic words, named entities, and source-specific phrasing without requiring a large training set.
+
+The final model combines word-level TF-IDF features and character-level TF-IDF features. The word vectorizer uses unigrams, bigrams, and trigrams with up to 20,000 features, while the character vectorizer uses character 3--5 grams with up to 30,000 features. We compared Logistic Regression and LinearSVC classifiers under multiple regularization settings. The best model was a LinearSVC with $C=0.45$ and balanced class weights. We also tuned the decision threshold on out-of-fold validation scores, then exported the final linear decision function into a PyTorch \texttt{nn.Linear} layer so that the submitted \texttt{model.py}, \texttt{preprocess.py}, and \texttt{model.pt} follow the course evaluation contract.
+
+\subsection{Evaluation and Model Performance}
+Accuracy was the primary selection metric because Project B is evaluated by classification accuracy. We also tracked macro F1, weighted F1, per-class precision and recall, and confusion matrices to understand whether improvements were balanced across both outlets. Table~\ref{tab:model-results} summarizes the main model iterations.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lccc}
+\hline
+Model & Evaluation protocol & Accuracy & Notes \\
+\hline
+Course baseline & Provided reference & 0.6649 & TF-IDF + Logistic Regression \\
+Local linear baseline & 80/20 split & 0.7359 & PyTorch linear classifier \\
+TF-IDF + Logistic Regression & 80/20 split & 0.8121 & Word + character n-grams \\
+TF-IDF + LinearSVC & 5-fold CV & 0.8313 & Final selected model \\
+\hline
+\end{tabular}
+\caption{Summary of the main model iterations. Accuracy is reported using the validation protocol listed for each row.}
+\label{tab:model-results}
+\end{table}
+
+The final LinearSVC model achieved 0.8313 cross-validated accuracy, 0.8308 macro F1, and 0.8313 weighted F1. Its per-class F1 scores were 0.8395 for Fox News and 0.8221 for NBC, suggesting that the model performs reasonably well on both classes while still slightly favoring Fox News. The cross-validated confusion matrix contained 1,677 correctly classified Fox News headlines, 1,481 correctly classified NBC headlines, 323 Fox News headlines predicted as NBC, and 318 NBC headlines predicted as Fox News. Based on these results, we selected the LinearSVC model as the final submission model.
+
+\section{Exploratory Components}
+
+For each of your exploratory components, you will describe the following in the report. The specific format of this section is left to you, so use a format that is convenient for you to describe the following:
+\begin{itemize}
+\item \textbf{Code}: Summarize your motivation for code modifications, such as porting to a new language or improving efficiency, and describe your approach, focusing on major implementation choices. Discuss specific challenges encountered and solutions implemented during development. Present benchmarks or comparisons showing the impact of your contributions on performance or usability.
+\item \textbf{Technique}: State the modeling or algorithmic innovation explored, including its theoretical motivation or inspiration from previous literature. Outline the main steps for implementation and validation of the new technique, and highlight any key design decisions or parameter choices. Briefly summarize results from experiments or ablation studies, comparing them to baseline performance.
+\item \textbf{Analysis}: Describe the research question or hypothesis you investigated, and detail the experimental design or analytical methods used to address it. Present your primary findings, supported by visualizations or summary statistics as appropriate. Discuss the insights gained and any implications or limitations that surfaced during your analysis.
+\item \textbf{Teaching}: Specify the teaching resource or artifact you developed, such as a blog post, demo, or presentation, and identify the intended audience. Explain your approach to breaking down complex concepts and making them accessible, including any visual or interactive elements used. Summarize feedback, audience engagement, or lessons learned from the process of creating educational materials.
+\item \textbf{Application}: Identify the real-world scenario or dataset where you applied your model, and note any modifications necessary to adapt your approach for this context. Provide a concise evaluation of model performance or utility in the new domain, mentioning both strengths and challenges encountered. Reflect on the broader applicability and relevance of your solution in practical settings.
+\item \textbf{Datasets}: Explain the motivation for collecting or curating new data and describe your sourcing and cleaning procedures. Give a brief summary of dataset characteristics, such as size, balance, labeling method, or notable attributes, using figures or tables if helpful. Note any difficulties with data quality and the steps you took to ensure the integrity and reproducibility of the dataset.
+
+\item \textbf{Comparison}: Analyze the pros and cons of State of the Art methods and how your work benefits from them or addresses their limitations. Use empirical results to compare your work with other SOTA to justify your claim. You don't have to outperform the SOTA methods.
+\end{itemize}
+
+\section{Team Contributions}
+Description of the contributions of each team member, e.g., who participated in data collection, who in model design, who in each exploratory direction, who on project report writing, etc. One sentence for each member is sufficient.
+
+\section{Extra Credit}
+An extra credit of 5\% of the project grade will be awarded if a video demo is submitted along with the report. The video duration should be a maximum of 10 minutes, and all team members must present some part to receive full credit. Please include the link to the video in this section.
+
+\vspace{3em}
+\noindent
+{\bf Page limit:} The main body of the report should be no more than 5 pages, excluding references. You may include additional text, results, or proofs in the appendix. However, ensure that all important findings are included in the main body, as the project grading team will primarily focus on evaluating the main body of the report.
+
+\section{(Optional, not included within 5 page limit) Acknowledgments of help received from outside of the project team}
+
+\section{(Optional, not included within 5 page limit) Suggestions for future iterations of this project}
+
+\section{(Optional, not included within 5 page limit) Plots and appendix}
+
+\end{document}
