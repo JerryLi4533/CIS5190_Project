@@ -45,6 +45,26 @@ pip install -r requirements.txt
 python scripts/train_baseline.py
 ```
 
+To run the stronger experiment search and export the best compatible submission model:
+
+```powershell
+python scripts/train_model_search.py
+```
+
+For a faster smoke test before the full search:
+
+```powershell
+python scripts/train_model_search.py --quick
+```
+
+To refine the current best word-trigram LinearSVC model around nearby `C` values:
+
+```powershell
+python scripts/train_model_search.py --refine-word-trigrams-svc --svc-c-values 0.35 0.4 0.45 0.5 0.6 0.75
+```
+
+Each search writes detailed metrics to `artifacts/model_search_metrics.json` and a report-ready summary to `artifacts/model_improvement_summary.md`.
+
 If you want to scrape more article titles from a URL list:
 
 ```powershell
