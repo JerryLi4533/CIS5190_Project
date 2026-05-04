@@ -81,7 +81,14 @@ def clean_text(text: str) -> str:
     text = text.replace("\u2019", "'").replace("\u2018", "'")
     text = text.replace("\u201c", '"').replace("\u201d", '"')
     text = text.replace("\u2013", "-").replace("\u2014", "-")
-    text = re.sub(r"\s+[-|]\s+(fox news|nbc news|msnbc)\s*$", "", text, flags=re.IGNORECASE)
+    text = re.sub(
+        r"\s+[-|:]\s+"
+        r"(fox news|fox business|nbc news|nbc news now|nbc select|msnbc|today)"
+        r"\s*$",
+        "",
+        text,
+        flags=re.IGNORECASE,
+    )
     return re.sub(r"\s+", " ", text).strip()
 
 
@@ -605,6 +612,33 @@ def build_preprocess_py(
     num_features = len(word_terms) + len(char_terms)
     word_min, word_max = feature_config.word_ngram_range
     char_min, char_max = feature_config.char_ngram_range
+    url_import = "" if feature_config.text_mode == "headline" else "from urllib.parse import urlparse\n"
+    if feature_config.text_mode == "headline":
+        url_helpers = '''def build_model_text(headline: str, url: str = "") -> str:
+    return clean_text(headline)
+'''
+    else:
+        url_helpers = '''def url_to_text(url: str) -> str:
+    parsed = urlparse(str(url))
+    path = parsed.path.lower()
+    if TEXT_MODE == "headline_url_slug":
+        path = path.rstrip("/").split("/")[-1]
+    elif TEXT_MODE != "headline_url_path":
+        raise ValueError(f"Unknown TEXT_MODE: {TEXT_MODE}")
+
+    path = re.sub(r"\\.(html?|print)$", " ", path)
+    path = re.sub(r"[^a-z0-9]+", " ", path)
+    path = re.sub(r"\\b(foxnews|fox|nbcnews|nbc|www|com|print)\\b", " ", path)
+    return re.sub(r"\\s+", " ", path).strip()
+
+
+def build_model_text(headline: str, url: str = "") -> str:
+    headline_text = clean_text(headline)
+    url_text = url_to_text(url)
+    if not url_text:
+        return headline_text
+    return f"{headline_text} {url_text}".strip()
+'''
 
     return f'''from __future__ import annotations
 
@@ -614,7 +648,7 @@ import json
 import math
 import re
 import zlib
-from urllib.parse import urlparse
+{url_import.rstrip()}
 from typing import Dict, List, Tuple
 
 import pandas as pd
@@ -657,33 +691,18 @@ def clean_text(text: str) -> str:
     text = text.replace("\\u2019", "'").replace("\\u2018", "'")
     text = text.replace("\\u201c", '"').replace("\\u201d", '"')
     text = text.replace("\\u2013", "-").replace("\\u2014", "-")
-    text = re.sub(r"\\s+[-|]\\s+(fox news|nbc news|msnbc)\\s*$", "", text, flags=re.IGNORECASE)
+    text = re.sub(
+        r"\\s+[-|:]\\s+"
+        r"(fox news|fox business|nbc news|nbc news now|nbc select|msnbc|today)"
+        r"\\s*$",
+        "",
+        text,
+        flags=re.IGNORECASE,
+    )
     return re.sub(r"\\s+", " ", text).strip()
 
 
-def url_to_text(url: str) -> str:
-    if TEXT_MODE == "headline":
-        return ""
-
-    parsed = urlparse(str(url))
-    path = parsed.path.lower()
-    if TEXT_MODE == "headline_url_slug":
-        path = path.rstrip("/").split("/")[-1]
-    elif TEXT_MODE != "headline_url_path":
-        raise ValueError(f"Unknown TEXT_MODE: {{TEXT_MODE}}")
-
-    path = re.sub(r"\\.(html?|print)$", " ", path)
-    path = re.sub(r"[^a-z0-9]+", " ", path)
-    path = re.sub(r"\\b(foxnews|fox|nbcnews|nbc|www|com|print)\\b", " ", path)
-    return re.sub(r"\\s+", " ", path).strip()
-
-
-def build_model_text(headline: str, url: str = "") -> str:
-    headline_text = clean_text(headline)
-    url_text = url_to_text(url)
-    if not url_text:
-        return headline_text
-    return f"{{headline_text}} {{url_text}}".strip()
+{url_helpers.rstrip()}
 
 
 def _tf(count: float) -> float:

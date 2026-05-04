@@ -1,5 +1,5 @@
 {
-  "dataset_path": "C:\\Users\\User\\Desktop\\image\\CIS5190_Project\\data\\raw\\url_with_headlines.csv",
+  "dataset_path": "/Users/Angie/Desktop/CIS5190_Project/data/raw/url_with_headlines.csv",
   "dataset": {
     "input_examples": 3805,
     "used_examples": 3799,
@@ -11,44 +11,45 @@
     "label_counts": {
       "FoxNews": 2000,
       "NBC": 1799
-    }
+    },
+    "text_mode": "headline"
   },
   "validation_dataset_path": null,
   "validation_dataset": null,
   "selection_metric": "threshold_accuracy",
   "best_model": {
-    "default_accuracy": 0.8260068439062911,
-    "threshold_accuracy": 0.8312713872071598,
-    "default_macro_f1": 0.8251235192643533,
-    "threshold_macro_f1": 0.830839308043875,
-    "default_weighted_f1": 0.8257811053866849,
-    "threshold_weighted_f1": 0.8312916409179387,
-    "roc_auc": 0.9037434685936632,
-    "threshold": -0.04404556179129426,
+    "default_accuracy": 0.8299552513819426,
+    "threshold_accuracy": 0.8315346143722032,
+    "default_macro_f1": 0.8290063649675397,
+    "threshold_macro_f1": 0.830842520241625,
+    "default_weighted_f1": 0.8296803090286526,
+    "threshold_weighted_f1": 0.8314149931644489,
+    "roc_auc": 0.9049285714285714,
+    "threshold": -0.022318083920666025,
     "classification_report": {
       "FoxNews": {
-        "precision": 0.8412857860371673,
-        "recall": 0.8375,
-        "f1-score": 0.839388624404911,
+        "precision": 0.8330068560235063,
+        "recall": 0.8505,
+        "f1-score": 0.8416625432953984,
         "support": 2000.0
       },
       "NBC": {
-        "precision": 0.8202433628318584,
-        "recall": 0.8243468593663146,
-        "f1-score": 0.8222899916828389,
+        "precision": 0.829823562891292,
+        "recall": 0.8104502501389661,
+        "f1-score": 0.8200224971878515,
         "support": 1799.0
       },
-      "accuracy": 0.8312713872071598,
+      "accuracy": 0.8315346143722032,
       "macro avg": {
-        "precision": 0.8307645744345129,
-        "recall": 0.8309234296831574,
-        "f1-score": 0.830839308043875,
+        "precision": 0.8314152094573992,
+        "recall": 0.8304751250694831,
+        "f1-score": 0.830842520241625,
         "support": 3799.0
       },
       "weighted avg": {
-        "precision": 0.8313212376438136,
-        "recall": 0.8312713872071598,
-        "f1-score": 0.8312916409179387,
+        "precision": 0.831499421344682,
+        "recall": 0.8315346143722032,
+        "f1-score": 0.8314149931644489,
         "support": 3799.0
       }
     },
@@ -58,19 +59,19 @@
     ],
     "confusion_matrix": [
       [
-        1675,
-        325
+        1701,
+        299
       ],
       [
-        316,
-        1483
+        341,
+        1458
       ]
     ],
-    "ensemble_name": "svc_035_045_060",
+    "ensemble_name": "svc_035_040_045",
     "validation_protocol": "stratified_cv",
     "feature_config": {
-      "word_max_features": 20000,
-      "char_max_features": 30000,
+      "word_max_features": 30000,
+      "char_max_features": 50000,
       "word_ngram_range": [
         1,
         3
@@ -90,57 +91,57 @@
       },
       {
         "kind": "linearsvc",
-        "c": 0.45,
+        "c": 0.4,
         "class_weight": "balanced"
       },
       {
         "kind": "linearsvc",
-        "c": 0.6,
+        "c": 0.45,
         "class_weight": "balanced"
       }
     ]
   },
   "final_export": {
-    "num_features": 50000,
-    "threshold_exported_as_bias_shift": -0.04404556179129426,
-    "weights_path": "C:\\Users\\User\\Desktop\\image\\CIS5190_Project\\artifacts\\model.pt",
-    "model_path": "C:\\Users\\User\\Desktop\\image\\CIS5190_Project\\submission\\model.py",
-    "preprocess_path": "C:\\Users\\User\\Desktop\\image\\CIS5190_Project\\submission\\preprocess.py"
+    "num_features": 80000,
+    "threshold_exported_as_bias_shift": -0.022318083920666025,
+    "weights_path": "/Users/Angie/Desktop/CIS5190_Project/artifacts/model.pt",
+    "model_path": "/Users/Angie/Desktop/CIS5190_Project/submission/model.py",
+    "preprocess_path": "/Users/Angie/Desktop/CIS5190_Project/submission/preprocess.py"
   },
   "all_results": [
     {
-      "default_accuracy": 0.8260068439062911,
-      "threshold_accuracy": 0.8312713872071598,
-      "default_macro_f1": 0.8251235192643533,
-      "threshold_macro_f1": 0.830839308043875,
-      "default_weighted_f1": 0.8257811053866849,
-      "threshold_weighted_f1": 0.8312916409179387,
-      "roc_auc": 0.9037434685936632,
-      "threshold": -0.04404556179129426,
+      "default_accuracy": 0.8299552513819426,
+      "threshold_accuracy": 0.8315346143722032,
+      "default_macro_f1": 0.8290063649675397,
+      "threshold_macro_f1": 0.830842520241625,
+      "default_weighted_f1": 0.8296803090286526,
+      "threshold_weighted_f1": 0.8314149931644489,
+      "roc_auc": 0.9049285714285714,
+      "threshold": -0.022318083920666025,
       "classification_report": {
         "FoxNews": {
-          "precision": 0.8412857860371673,
-          "recall": 0.8375,
-          "f1-score": 0.839388624404911,
+          "precision": 0.8330068560235063,
+          "recall": 0.8505,
+          "f1-score": 0.8416625432953984,
           "support": 2000.0
         },
         "NBC": {
-          "precision": 0.8202433628318584,
-          "recall": 0.8243468593663146,
-          "f1-score": 0.8222899916828389,
+          "precision": 0.829823562891292,
+          "recall": 0.8104502501389661,
+          "f1-score": 0.8200224971878515,
           "support": 1799.0
         },
-        "accuracy": 0.8312713872071598,
+        "accuracy": 0.8315346143722032,
         "macro avg": {
-          "precision": 0.8307645744345129,
-          "recall": 0.8309234296831574,
-          "f1-score": 0.830839308043875,
+          "precision": 0.8314152094573992,
+          "recall": 0.8304751250694831,
+          "f1-score": 0.830842520241625,
           "support": 3799.0
         },
         "weighted avg": {
-          "precision": 0.8313212376438136,
-          "recall": 0.8312713872071598,
-          "f1-score": 0.8312916409179387,
+          "precision": 0.831499421344682,
+          "recall": 0.8315346143722032,
+          "f1-score": 0.8314149931644489,
           "support": 3799.0
         }
       },
@@ -150,187 +151,19 @@
       ],
       "confusion_matrix": [
         [
-          1675,
-          325
+          1701,
+          299
         ],
         [
-          316,
-          1483
-        ]
-      ],
-      "ensemble_name": "svc_035_045_060",
-      "validation_protocol": "stratified_cv",
-      "feature_config": {
-        "word_max_features": 20000,
-        "char_max_features": 30000,
-        "word_ngram_range": [
-          1,
-          3
-        ],
-        "char_ngram_range": [
-          3,
-          5
-        ],
-        "min_df": 1,
-        "sublinear_tf": true
-      },
-      "classifier_configs": [
-        {
-          "kind": "linearsvc",
-          "c": 0.35,
-          "class_weight": "balanced"
-        },
-        {
-          "kind": "linearsvc",
-          "c": 0.45,
-          "class_weight": "balanced"
-        },
-        {
-          "kind": "linearsvc",
-          "c": 0.6,
-          "class_weight": "balanced"
-        }
-      ]
-    },
-    {
-      "default_accuracy": 0.8254803895762043,
-      "threshold_accuracy": 0.8310081600421163,
-      "default_macro_f1": 0.8245943922424602,
-      "threshold_macro_f1": 0.8306236822587232,
-      "default_weighted_f1": 0.8252539680353586,
-      "threshold_weighted_f1": 0.831050643775088,
-      "roc_auc": 0.9037518065591994,
-      "threshold": -0.05002315634448838,
-      "classification_report": {
-        "FoxNews": {
-          "precision": 0.842929292929293,
-          "recall": 0.8345,
-          "f1-score": 0.8386934673366834,
-          "support": 2000.0
-        },
-        "NBC": {
-          "precision": 0.8180318856514568,
-          "recall": 0.8271261812117843,
-          "f1-score": 0.8225538971807629,
-          "support": 1799.0
-        },
-        "accuracy": 0.8310081600421163,
-        "macro avg": {
-          "precision": 0.8304805892903748,
-          "recall": 0.8308130906058921,
-          "f1-score": 0.8306236822587232,
-          "support": 3799.0
-        },
-        "weighted avg": {
-          "precision": 0.8311392335208099,
-          "recall": 0.8310081600421163,
-          "f1-score": 0.831050643775088,
-          "support": 3799.0
-        }
-      },
-      "confusion_matrix_labels": [
-        "FoxNews",
-        "NBC"
-      ],
-      "confusion_matrix": [
-        [
-          1669,
-          331
-        ],
-        [
-          311,
-          1488
-        ]
-      ],
-      "ensemble_name": "svc_040_045_050",
-      "validation_protocol": "stratified_cv",
-      "feature_config": {
-        "word_max_features": 20000,
-        "char_max_features": 30000,
-        "word_ngram_range": [
-          1,
-          3
-        ],
-        "char_ngram_range": [
-          3,
-          5
-        ],
-        "min_df": 1,
-        "sublinear_tf": true
-      },
-      "classifier_configs": [
-        {
-          "kind": "linearsvc",
-          "c": 0.4,
-          "class_weight": "balanced"
-        },
-        {
-          "kind": "linearsvc",
-          "c": 0.45,
-          "class_weight": "balanced"
-        },
-        {
-          "kind": "linearsvc",
-          "c": 0.5,
-          "class_weight": "balanced"
-        }
-      ]
-    },
-    {
-      "default_accuracy": 0.8257436167412477,
-      "threshold_accuracy": 0.830744932877073,
-      "default_macro_f1": 0.8248523569952142,
-      "threshold_macro_f1": 0.8303641090024925,
-      "default_weighted_f1": 0.8255134020467003,
-      "threshold_weighted_f1": 0.8307893623291072,
-      "roc_auc": 0.9037265147304057,
-      "threshold": -0.047010136492175975,
-      "classification_report": {
-        "FoxNews": {
-          "precision": 0.8428499242041435,
-          "recall": 0.834,
-          "f1-score": 0.8384016084443328,
-          "support": 2000.0
-        },
-        "NBC": {
-          "precision": 0.8175824175824176,
-          "recall": 0.8271261812117843,
-          "f1-score": 0.8223266095606521,
-          "support": 1799.0
-        },
-        "accuracy": 0.830744932877073,
-        "macro avg": {
-          "precision": 0.8302161708932805,
-          "recall": 0.8305630906058921,
-          "f1-score": 0.8303641090024925,
-          "support": 3799.0
-        },
-        "weighted avg": {
-          "precision": 0.8308846058539237,
-          "recall": 0.830744932877073,
-          "f1-score": 0.8307893623291072,
-          "support": 3799.0
-        }
-      },
-      "confusion_matrix_labels": [
-        "FoxNews",
-        "NBC"
-      ],
-      "confusion_matrix": [
-        [
-          1668,
-          332
-        ],
-        [
-          311,
-          1488
+          341,
+          1458
         ]
       ],
       "ensemble_name": "svc_035_040_045",
       "validation_protocol": "stratified_cv",
       "feature_config": {
-        "word_max_features": 20000,
-        "char_max_features": 30000,
+        "word_max_features": 30000,
+        "char_max_features": 50000,
         "word_ngram_range": [
           1,
           3
@@ -361,38 +194,38 @@
       ]
     },
     {
-      "default_accuracy": 0.8252171624111608,
-      "threshold_accuracy": 0.830744932877073,
-      "default_macro_f1": 0.8243625478479026,
-      "threshold_macro_f1": 0.830338235585216,
-      "default_weighted_f1": 0.8250107649317324,
-      "threshold_weighted_f1": 0.830777731045771,
-      "roc_auc": 0.9037206781545304,
-      "threshold": -0.04776995493430266,
+      "default_accuracy": 0.830218478546986,
+      "threshold_accuracy": 0.8312713872071598,
+      "default_macro_f1": 0.8292643159420683,
+      "threshold_macro_f1": 0.8307241647895192,
+      "default_weighted_f1": 0.8299396211659713,
+      "threshold_weighted_f1": 0.8312333856503792,
+      "roc_auc": 0.9051787103946637,
+      "threshold": -0.03589251941051093,
       "classification_report": {
         "FoxNews": {
-          "precision": 0.8418136020151133,
-          "recall": 0.8355,
-          "f1-score": 0.8386449184441657,
+          "precision": 0.8372208436724565,
+          "recall": 0.8435,
+          "f1-score": 0.840348692403487,
           "support": 2000.0
         },
         "NBC": {
-          "precision": 0.818632855567806,
-          "recall": 0.8254585881045025,
-          "f1-score": 0.8220315527262663,
+          "precision": 0.8245515695067265,
+          "recall": 0.8176764869371873,
+          "f1-score": 0.8210996371755512,
           "support": 1799.0
         },
-        "accuracy": 0.830744932877073,
+        "accuracy": 0.8312713872071598,
         "macro avg": {
-          "precision": 0.8302232287914597,
-          "recall": 0.8304792940522512,
-          "f1-score": 0.830338235585216,
+          "precision": 0.8308862065895914,
+          "recall": 0.8305882434685936,
+          "f1-score": 0.8307241647895192,
           "support": 3799.0
         },
         "weighted avg": {
-          "precision": 0.8308364599096366,
-          "recall": 0.830744932877073,
-          "f1-score": 0.830777731045771,
+          "precision": 0.8312213637503327,
+          "recall": 0.8312713872071598,
+          "f1-score": 0.8312333856503792,
           "support": 3799.0
         }
       },
@@ -402,108 +235,19 @@
       ],
       "confusion_matrix": [
         [
-          1671,
-          329
+          1687,
+          313
         ],
         [
-          314,
-          1485
-        ]
-      ],
-      "ensemble_name": "svc_040_045_050_060",
-      "validation_protocol": "stratified_cv",
-      "feature_config": {
-        "word_max_features": 20000,
-        "char_max_features": 30000,
-        "word_ngram_range": [
-          1,
-          3
-        ],
-        "char_ngram_range": [
-          3,
-          5
-        ],
-        "min_df": 1,
-        "sublinear_tf": true
-      },
-      "classifier_configs": [
-        {
-          "kind": "linearsvc",
-          "c": 0.4,
-          "class_weight": "balanced"
-        },
-        {
-          "kind": "linearsvc",
-          "c": 0.45,
-          "class_weight": "balanced"
-        },
-        {
-          "kind": "linearsvc",
-          "c": 0.5,
-          "class_weight": "balanced"
-        },
-        {
-          "kind": "linearsvc",
-          "c": 0.6,
-          "class_weight": "balanced"
-        }
-      ]
-    },
-    {
-      "default_accuracy": 0.8257436167412477,
-      "threshold_accuracy": 0.8304817057120295,
-      "default_macro_f1": 0.8248915763182403,
-      "threshold_macro_f1": 0.8300699735897346,
-      "default_weighted_f1": 0.8255378409409743,
-      "threshold_weighted_f1": 0.8305125305768002,
-      "roc_auc": 0.9036881600889383,
-      "threshold": -0.047708500521460875,
-      "classification_report": {
-        "FoxNews": {
-          "precision": 0.8413897280966768,
-          "recall": 0.8355,
-          "f1-score": 0.8384345208228801,
-          "support": 2000.0
-        },
-        "NBC": {
-          "precision": 0.8185328185328186,
-          "recall": 0.8249027237354085,
-          "f1-score": 0.8217054263565892,
-          "support": 1799.0
-        },
-        "accuracy": 0.8304817057120295,
-        "macro avg": {
-          "precision": 0.8299612733147477,
-          "recall": 0.8302013618677042,
-          "f1-score": 0.8300699735897346,
-          "support": 3799.0
-        },
-        "weighted avg": {
-          "precision": 0.8305659375451157,
-          "recall": 0.8304817057120295,
-          "f1-score": 0.8305125305768002,
-          "support": 3799.0
-        }
-      },
-      "confusion_matrix_labels": [
-        "FoxNews",
-        "NBC"
-      ],
-      "confusion_matrix": [
-        [
-          1671,
-          329
-        ],
-        [
-          315,
-          1484
+          328,
+          1471
         ]
       ],
       "ensemble_name": "svc_035_040_045_050_060_075",
       "validation_protocol": "stratified_cv",
       "feature_config": {
-        "word_max_features": 20000,
-        "char_max_features": 30000,
+        "word_max_features": 30000,
+        "char_max_features": 50000,
         "word_ngram_range": [
           1,
           3
@@ -544,6 +288,263 @@
         {
           "kind": "linearsvc",
           "c": 0.75,
+          "class_weight": "balanced"
+        }
+      ]
+    },
+    {
+      "default_accuracy": 0.8304817057120295,
+      "threshold_accuracy": 0.8312713872071598,
+      "default_macro_f1": 0.8295222635413293,
+      "threshold_macro_f1": 0.8304401062691635,
+      "default_weighted_f1": 0.8301989227564547,
+      "threshold_weighted_f1": 0.8310682546471231,
+      "roc_auc": 0.9051075597554197,
+      "threshold": -0.01020316059364826,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8290556900726392,
+          "recall": 0.856,
+          "f1-score": 0.8423124231242313,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8339100346020761,
+          "recall": 0.8037798777098388,
+          "f1-score": 0.8185677894140957,
+          "support": 1799.0
+        },
+        "accuracy": 0.8312713872071598,
+        "macro avg": {
+          "precision": 0.8314828623373577,
+          "recall": 0.8298899388549195,
+          "f1-score": 0.8304401062691635,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8313544439048206,
+          "recall": 0.8312713872071598,
+          "f1-score": 0.8310682546471231,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1712,
+          288
+        ],
+        [
+          353,
+          1446
+        ]
+      ],
+      "ensemble_name": "svc_035_045_060",
+      "validation_protocol": "stratified_cv",
+      "feature_config": {
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true
+      },
+      "classifier_configs": [
+        {
+          "kind": "linearsvc",
+          "c": 0.35,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.45,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.6,
+          "class_weight": "balanced"
+        }
+      ]
+    },
+    {
+      "default_accuracy": 0.830218478546986,
+      "threshold_accuracy": 0.8312713872071598,
+      "default_macro_f1": 0.8292643159420683,
+      "threshold_macro_f1": 0.8304019865142516,
+      "default_weighted_f1": 0.8299396211659713,
+      "threshold_weighted_f1": 0.8310444480557021,
+      "roc_auc": 0.9051745414118955,
+      "threshold": -0.0071133486708079025,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.82810236600676,
+          "recall": 0.8575,
+          "f1-score": 0.8425448292802751,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8350694444444444,
+          "recall": 0.802112284602557,
+          "f1-score": 0.818259143748228,
+          "support": 1799.0
+        },
+        "accuracy": 0.8312713872071598,
+        "macro avg": {
+          "precision": 0.8315859052256023,
+          "recall": 0.8298061423012786,
+          "f1-score": 0.8304019865142516,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8314015958328707,
+          "recall": 0.8312713872071598,
+          "f1-score": 0.8310444480557021,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1715,
+          285
+        ],
+        [
+          356,
+          1443
+        ]
+      ],
+      "ensemble_name": "svc_040_045_050_060",
+      "validation_protocol": "stratified_cv",
+      "feature_config": {
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true
+      },
+      "classifier_configs": [
+        {
+          "kind": "linearsvc",
+          "c": 0.4,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.45,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.5,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.6,
+          "class_weight": "balanced"
+        }
+      ]
+    },
+    {
+      "default_accuracy": 0.8304817057120295,
+      "threshold_accuracy": 0.8310081600421163,
+      "default_macro_f1": 0.8295357570264638,
+      "threshold_macro_f1": 0.8302312236258724,
+      "default_weighted_f1": 0.8302076145734557,
+      "threshold_weighted_f1": 0.8308388665039464,
+      "roc_auc": 0.9051058921623124,
+      "threshold": -0.01572930805802787,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8302529182879378,
+          "recall": 0.8535,
+          "f1-score": 0.841715976331361,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.831899024670109,
+          "recall": 0.8060033351862146,
+          "f1-score": 0.818746470920384,
+          "support": 1799.0
+        },
+        "accuracy": 0.8310081600421163,
+        "macro avg": {
+          "precision": 0.8310759714790235,
+          "recall": 0.8297516675931074,
+          "f1-score": 0.8302312236258724,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8310324248374312,
+          "recall": 0.8310081600421163,
+          "f1-score": 0.8308388665039464,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1707,
+          293
+        ],
+        [
+          349,
+          1450
+        ]
+      ],
+      "ensemble_name": "svc_040_045_050",
+      "validation_protocol": "stratified_cv",
+      "feature_config": {
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true
+      },
+      "classifier_configs": [
+        {
+          "kind": "linearsvc",
+          "c": 0.4,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.45,
+          "class_weight": "balanced"
+        },
+        {
+          "kind": "linearsvc",
+          "c": 0.5,
           "class_weight": "balanced"
         }
       ]

@@ -1,0 +1,1595 @@
+{
+  "dataset_path": "/Users/Angie/Desktop/CIS5190_Project/data/raw/url_with_headlines.csv",
+  "dataset": {
+    "input_examples": 3805,
+    "used_examples": 3799,
+    "blank_examples": 4,
+    "dropped_blank_examples": 4,
+    "conflicting_duplicate_examples": 0,
+    "duplicate_headline_examples": 2,
+    "dropped_duplicate_headline_examples": 2,
+    "label_counts": {
+      "FoxNews": 2000,
+      "NBC": 1799
+    },
+    "text_mode": "headline"
+  },
+  "validation_dataset_path": null,
+  "validation_dataset": null,
+  "validation_protocol": "stratified_cv",
+  "text_mode": "headline",
+  "cv_folds": 5,
+  "quick": false,
+  "search_mode": "expanded_tfidf_linearsvc",
+  "selection_metric": "oof_threshold_accuracy",
+  "diagnostic_metrics": [
+    "macro_f1",
+    "weighted_f1",
+    "per_class_precision_recall_f1",
+    "confusion_matrix",
+    "roc_auc"
+  ],
+  "best_model": {
+    "feature_config": {
+      "name": "expanded_w30_c50_word13_char25",
+      "word_max_features": 30000,
+      "char_max_features": 50000,
+      "word_ngram_range": [
+        1,
+        3
+      ],
+      "char_ngram_range": [
+        2,
+        5
+      ],
+      "min_df": 1,
+      "sublinear_tf": true,
+      "text_mode": "headline"
+    },
+    "classifier_config": {
+      "kind": "linearsvc",
+      "c": 1.0,
+      "class_weight": "balanced"
+    },
+    "fold_default_accuracy_mean": 0.836007558421746,
+    "fold_default_accuracy_std": 0.008426669000730306,
+    "oof_default_accuracy": 0.8360094761779415,
+    "oof_threshold_accuracy": 0.8370623848381153,
+    "oof_default_macro_f1": 0.8350348923272984,
+    "oof_default_weighted_f1": 0.8357057531285973,
+    "oof_threshold_macro_f1": 0.8361724372180273,
+    "oof_threshold_weighted_f1": 0.8368112924738761,
+    "oof_roc_auc": 0.9114941634241245,
+    "threshold": -0.009247484989467827,
+    "classification_report": {
+      "FoxNews": {
+        "precision": 0.8321308321308322,
+        "recall": 0.865,
+        "f1-score": 0.8482471193920078,
+        "support": 2000.0
+      },
+      "NBC": {
+        "precision": 0.8430232558139535,
+        "recall": 0.8060033351862146,
+        "f1-score": 0.8240977550440466,
+        "support": 1799.0
+      },
+      "accuracy": 0.8370623848381153,
+      "macro avg": {
+        "precision": 0.8375770439723929,
+        "recall": 0.8355016675931073,
+        "f1-score": 0.8361724372180273,
+        "support": 3799.0
+      },
+      "weighted avg": {
+        "precision": 0.8372888922008335,
+        "recall": 0.8370623848381153,
+        "f1-score": 0.8368112924738761,
+        "support": 3799.0
+      }
+    },
+    "confusion_matrix_labels": [
+      "FoxNews",
+      "NBC"
+    ],
+    "confusion_matrix": [
+      [
+        1730,
+        270
+      ],
+      [
+        349,
+        1450
+      ]
+    ]
+  },
+  "final_export": {
+    "num_features": 80000,
+    "threshold_exported_as_bias_shift": -0.009247484989467827,
+    "weights_path": "/Users/Angie/Desktop/CIS5190_Project/artifacts/model.pt",
+    "model_path": "/Users/Angie/Desktop/CIS5190_Project/submission/model.py",
+    "preprocess_path": "/Users/Angie/Desktop/CIS5190_Project/submission/preprocess.py"
+  },
+  "all_results": [
+    {
+      "feature_config": {
+        "name": "expanded_w30_c50_word13_char25",
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          2,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 1.0,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.836007558421746,
+      "fold_default_accuracy_std": 0.008426669000730306,
+      "oof_default_accuracy": 0.8360094761779415,
+      "oof_threshold_accuracy": 0.8370623848381153,
+      "oof_default_macro_f1": 0.8350348923272984,
+      "oof_default_weighted_f1": 0.8357057531285973,
+      "oof_threshold_macro_f1": 0.8361724372180273,
+      "oof_threshold_weighted_f1": 0.8368112924738761,
+      "oof_roc_auc": 0.9114941634241245,
+      "threshold": -0.009247484989467827,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8321308321308322,
+          "recall": 0.865,
+          "f1-score": 0.8482471193920078,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8430232558139535,
+          "recall": 0.8060033351862146,
+          "f1-score": 0.8240977550440466,
+          "support": 1799.0
+        },
+        "accuracy": 0.8370623848381153,
+        "macro avg": {
+          "precision": 0.8375770439723929,
+          "recall": 0.8355016675931073,
+          "f1-score": 0.8361724372180273,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8372888922008335,
+          "recall": 0.8370623848381153,
+          "f1-score": 0.8368112924738761,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1730,
+          270
+        ],
+        [
+          349,
+          1450
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w30_c50_word13_char25",
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          2,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.8,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8352184314541293,
+      "fold_default_accuracy_std": 0.008570119951011448,
+      "oof_default_accuracy": 0.8352197946828113,
+      "oof_threshold_accuracy": 0.8365359305080284,
+      "oof_default_macro_f1": 0.8342472532221147,
+      "oof_default_weighted_f1": 0.8349190086640391,
+      "oof_threshold_macro_f1": 0.8358134935479042,
+      "oof_threshold_weighted_f1": 0.8363897230280033,
+      "oof_roc_auc": 0.9117723735408559,
+      "threshold": -0.022015908572274173,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8361774744027304,
+          "recall": 0.8575,
+          "f1-score": 0.8467045174031104,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8369565217391305,
+          "recall": 0.8132295719844358,
+          "f1-score": 0.824922469692698,
+          "support": 1799.0
+        },
+        "accuracy": 0.8365359305080284,
+        "macro avg": {
+          "precision": 0.8365669980709305,
+          "recall": 0.835364785992218,
+          "f1-score": 0.8358134935479042,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.83654638889554,
+          "recall": 0.8365359305080284,
+          "f1-score": 0.8363897230280033,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1715,
+          285
+        ],
+        [
+          336,
+          1463
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w30_c50_word13_char25",
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          2,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.6,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8352198183205048,
+      "fold_default_accuracy_std": 0.008041526186972455,
+      "oof_default_accuracy": 0.8352197946828113,
+      "oof_threshold_accuracy": 0.8360094761779415,
+      "oof_default_macro_f1": 0.8342739584134725,
+      "oof_default_weighted_f1": 0.8349363733616852,
+      "oof_threshold_macro_f1": 0.834777854404702,
+      "oof_threshold_weighted_f1": 0.8355325982352543,
+      "oof_roc_auc": 0.9120519733185103,
+      "threshold": 0.02823631223147402,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8236953455571228,
+          "recall": 0.876,
+          "f1-score": 0.8490428882965835,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8516746411483254,
+          "recall": 0.7915508615897721,
+          "f1-score": 0.8205128205128205,
+          "support": 1799.0
+        },
+        "accuracy": 0.8360094761779415,
+        "macro avg": {
+          "precision": 0.8376849933527241,
+          "recall": 0.833775430794886,
+          "f1-score": 0.834777854404702,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8369448198315564,
+          "recall": 0.8360094761779415,
+          "f1-score": 0.8355325982352543,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1752,
+          248
+        ],
+        [
+          375,
+          1424
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w30_c50_word13_char25",
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          2,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.45,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8328510505512794,
+      "fold_default_accuracy_std": 0.008439331130723262,
+      "oof_default_accuracy": 0.8328507501974204,
+      "oof_threshold_accuracy": 0.8349565675177678,
+      "oof_default_macro_f1": 0.8319377990847291,
+      "oof_default_weighted_f1": 0.8325931675620539,
+      "oof_threshold_macro_f1": 0.8346988643433428,
+      "oof_threshold_weighted_f1": 0.8350441865970724,
+      "oof_roc_auc": 0.9119897165091718,
+      "threshold": -0.07311946815965638,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8522319138019497,
+          "recall": 0.8305,
+          "f1-score": 0.841225626740947,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8167567567567567,
+          "recall": 0.839911061700945,
+          "f1-score": 0.8281721019457385,
+          "support": 1799.0
+        },
+        "accuracy": 0.8349565675177678,
+        "macro avg": {
+          "precision": 0.8344943352793532,
+          "recall": 0.8352055308504724,
+          "f1-score": 0.8346988643433428,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8354328067937102,
+          "recall": 0.8349565675177678,
+          "f1-score": 0.8350441865970724,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1661,
+          339
+        ],
+        [
+          288,
+          1511
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w50_c80_word13_char35",
+        "word_max_features": 50000,
+        "char_max_features": 80000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.8,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8317984189723321,
+      "fold_default_accuracy_std": 0.007307653996971854,
+      "oof_default_accuracy": 0.8317978415372467,
+      "oof_threshold_accuracy": 0.834430113187681,
+      "oof_default_macro_f1": 0.8309182943201467,
+      "oof_default_weighted_f1": 0.8315635096144427,
+      "oof_threshold_macro_f1": 0.833960678582092,
+      "oof_threshold_weighted_f1": 0.8344277892539899,
+      "oof_roc_auc": 0.9061395219566427,
+      "threshold": -0.043864006351839804,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8425787106446777,
+          "recall": 0.843,
+          "f1-score": 0.8427893026743314,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8253615127919911,
+          "recall": 0.8249027237354085,
+          "f1-score": 0.8251320544898526,
+          "support": 1799.0
+        },
+        "accuracy": 0.834430113187681,
+        "macro avg": {
+          "precision": 0.8339701117183345,
+          "recall": 0.8339513618677042,
+          "f1-score": 0.833960678582092,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8344255811535002,
+          "recall": 0.834430113187681,
+          "f1-score": 0.8344277892539899,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1686,
+          314
+        ],
+        [
+          315,
+          1484
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w30_c50_word13_char25",
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          2,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.35,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8312714097496707,
+      "fold_default_accuracy_std": 0.010102578028256119,
+      "oof_default_accuracy": 0.8312713872071598,
+      "oof_threshold_accuracy": 0.8339036588575941,
+      "oof_default_macro_f1": 0.8303231418897145,
+      "oof_default_weighted_f1": 0.8309942591742445,
+      "oof_threshold_macro_f1": 0.8336373384489195,
+      "oof_threshold_weighted_f1": 0.8339895121472326,
+      "oof_roc_auc": 0.9116089494163425,
+      "threshold": -0.06604006941911651,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8508457201435161,
+          "recall": 0.83,
+          "f1-score": 0.8402935965578334,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.816017316017316,
+          "recall": 0.8382434685936632,
+          "f1-score": 0.8269810803400055,
+          "support": 1799.0
+        },
+        "accuracy": 0.8339036588575941,
+        "macro avg": {
+          "precision": 0.833431518080416,
+          "recall": 0.8341217342968316,
+          "f1-score": 0.8336373384489195,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8343528801795692,
+          "recall": 0.8339036588575941,
+          "f1-score": 0.8339895121472326,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1660,
+          340
+        ],
+        [
+          291,
+          1508
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w50_c80_word13_char35",
+        "word_max_features": 50000,
+        "char_max_features": 80000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 1.0,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8317984189723321,
+      "fold_default_accuracy_std": 0.006918210804425681,
+      "oof_default_accuracy": 0.8317978415372467,
+      "oof_threshold_accuracy": 0.8336404316925506,
+      "oof_default_macro_f1": 0.8309053389731632,
+      "oof_default_weighted_f1": 0.8315553136665718,
+      "oof_threshold_macro_f1": 0.8331734296831572,
+      "oof_threshold_weighted_f1": 0.8336404316925506,
+      "oof_roc_auc": 0.9061192329071708,
+      "threshold": -0.044355885455276994,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.842,
+          "recall": 0.842,
+          "f1-score": 0.842,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8243468593663146,
+          "recall": 0.8243468593663146,
+          "f1-score": 0.8243468593663146,
+          "support": 1799.0
+        },
+        "accuracy": 0.8336404316925506,
+        "macro avg": {
+          "precision": 0.8331734296831572,
+          "recall": 0.8331734296831572,
+          "f1-score": 0.8331734296831572,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8336404316925506,
+          "recall": 0.8336404316925506,
+          "f1-score": 0.8336404316925506,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1684,
+          316
+        ],
+        [
+          316,
+          1483
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w30_c50_word13_char35",
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.8,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.829428264336731,
+      "fold_default_accuracy_std": 0.0059344030435604786,
+      "oof_default_accuracy": 0.8294287970518558,
+      "oof_threshold_accuracy": 0.8336404316925506,
+      "oof_default_macro_f1": 0.8284769729086157,
+      "oof_default_weighted_f1": 0.8291530034838498,
+      "oof_threshold_macro_f1": 0.8331450485741321,
+      "oof_threshold_weighted_f1": 0.833626072761582,
+      "oof_roc_auc": 0.9051025569760979,
+      "threshold": -0.047886208665028344,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8409770687936191,
+          "recall": 0.8435,
+          "f1-score": 0.8422366450324513,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8254322364751813,
+          "recall": 0.8226792662590328,
+          "f1-score": 0.8240534521158129,
+          "support": 1799.0
+        },
+        "accuracy": 0.8336404316925506,
+        "macro avg": {
+          "precision": 0.8332046526344001,
+          "recall": 0.8330896331295163,
+          "f1-score": 0.8331450485741321,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8336158807596971,
+          "recall": 0.8336404316925506,
+          "f1-score": 0.833626072761582,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1687,
+          313
+        ],
+        [
+          319,
+          1480
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w30_c50_word13_char35",
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 1.0,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8283756327577837,
+      "fold_default_accuracy_std": 0.006898325351685109,
+      "oof_default_accuracy": 0.828375888391682,
+      "oof_threshold_accuracy": 0.8336404316925506,
+      "oof_default_macro_f1": 0.8274181887907677,
+      "oof_default_weighted_f1": 0.828098392394244,
+      "oof_threshold_macro_f1": 0.8331640631297255,
+      "oof_threshold_weighted_f1": 0.8336357384062175,
+      "oof_roc_auc": 0.9048401889938854,
+      "threshold": -0.052826234341548636,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8416583416583416,
+          "recall": 0.8425,
+          "f1-score": 0.8420789605197402,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8247078464106845,
+          "recall": 0.8237909949972206,
+          "f1-score": 0.8242491657397107,
+          "support": 1799.0
+        },
+        "accuracy": 0.8336404316925506,
+        "macro avg": {
+          "precision": 0.8331830940345131,
+          "recall": 0.8331454974986103,
+          "f1-score": 0.8331640631297255,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8336315080309303,
+          "recall": 0.8336404316925506,
+          "f1-score": 0.8336357384062175,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1685,
+          315
+        ],
+        [
+          317,
+          1482
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w50_c80_word13_char35",
+        "word_max_features": 50000,
+        "char_max_features": 80000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.6,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8320619235836627,
+      "fold_default_accuracy_std": 0.007167498113520402,
+      "oof_default_accuracy": 0.8320610687022901,
+      "oof_threshold_accuracy": 0.8331139773624638,
+      "oof_default_macro_f1": 0.8311764423990455,
+      "oof_default_weighted_f1": 0.8318230238061443,
+      "oof_threshold_macro_f1": 0.8325265252358263,
+      "oof_threshold_weighted_f1": 0.8330513158022892,
+      "oof_roc_auc": 0.9059891606448026,
+      "threshold": -0.028440280187932508,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8374505928853755,
+          "recall": 0.8475,
+          "f1-score": 0.8424453280318092,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.828169014084507,
+          "recall": 0.8171206225680934,
+          "f1-score": 0.8226077224398433,
+          "support": 1799.0
+        },
+        "accuracy": 0.8331139773624638,
+        "macro avg": {
+          "precision": 0.8328098034849413,
+          "recall": 0.8323103112840466,
+          "f1-score": 0.8325265252358263,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8330553414342667,
+          "recall": 0.8331139773624638,
+          "f1-score": 0.8330513158022892,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1695,
+          305
+        ],
+        [
+          329,
+          1470
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w30_c50_word14_char35",
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          4
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 1.0,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8275861590735734,
+      "fold_default_accuracy_std": 0.005583161000973304,
+      "oof_default_accuracy": 0.8275862068965517,
+      "oof_threshold_accuracy": 0.8331139773624638,
+      "oof_default_macro_f1": 0.8266309256325404,
+      "oof_default_weighted_f1": 0.8273118175973144,
+      "oof_threshold_macro_f1": 0.8324729418350307,
+      "oof_threshold_weighted_f1": 0.8330212317967925,
+      "oof_roc_auc": 0.904648415786548,
+      "threshold": -0.028224324818391294,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8357915437561455,
+          "recall": 0.85,
+          "f1-score": 0.842835894893406,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.830028328611898,
+          "recall": 0.8143413007226237,
+          "f1-score": 0.8221099887766554,
+          "support": 1799.0
+        },
+        "accuracy": 0.8331139773624638,
+        "macro avg": {
+          "precision": 0.8329099361840218,
+          "recall": 0.8321706503613118,
+          "f1-score": 0.8324729418350307,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8330623981798093,
+          "recall": 0.8331139773624638,
+          "f1-score": 0.8330212317967925,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1700,
+          300
+        ],
+        [
+          334,
+          1465
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w30_c50_word13_char35",
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.6,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8304819360654602,
+      "fold_default_accuracy_std": 0.007774365763916969,
+      "oof_default_accuracy": 0.8304817057120295,
+      "oof_threshold_accuracy": 0.8328507501974204,
+      "oof_default_macro_f1": 0.8295491533736861,
+      "oof_default_weighted_f1": 0.8302162103843872,
+      "oof_threshold_macro_f1": 0.8323481804363945,
+      "oof_threshold_weighted_f1": 0.8328338367920012,
+      "oof_roc_auc": 0.9052406892718177,
+      "threshold": -0.04554701787357304,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8400597907324364,
+          "recall": 0.843,
+          "f1-score": 0.8415273271774395,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8247767857142857,
+          "recall": 0.8215675375208449,
+          "f1-score": 0.8231690336953494,
+          "support": 1799.0
+        },
+        "accuracy": 0.8328507501974204,
+        "macro avg": {
+          "precision": 0.8324182882233611,
+          "recall": 0.8322837687604224,
+          "f1-score": 0.8323481804363945,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8328225898828304,
+          "recall": 0.8328507501974204,
+          "f1-score": 0.8328338367920012,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1686,
+          314
+        ],
+        [
+          321,
+          1478
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w50_c80_word14_char36",
+        "word_max_features": 50000,
+        "char_max_features": 80000,
+        "word_ngram_range": [
+          1,
+          4
+        ],
+        "char_ngram_range": [
+          3,
+          6
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 1.0,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8304815893488662,
+      "fold_default_accuracy_std": 0.006523213753444291,
+      "oof_default_accuracy": 0.8304817057120295,
+      "oof_threshold_accuracy": 0.8325875230323769,
+      "oof_default_macro_f1": 0.8295222635413293,
+      "oof_default_weighted_f1": 0.8301989227564547,
+      "oof_threshold_macro_f1": 0.8317935879835259,
+      "oof_threshold_weighted_f1": 0.8324050092280433,
+      "oof_roc_auc": 0.9052893274041134,
+      "threshold": -0.011594281831939295,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8310679611650486,
+          "recall": 0.856,
+          "f1-score": 0.8433497536945813,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8343875790684301,
+          "recall": 0.8065591995553085,
+          "f1-score": 0.8202374222724703,
+          "support": 1799.0
+        },
+        "accuracy": 0.8325875230323769,
+        "macro avg": {
+          "precision": 0.8327277701167393,
+          "recall": 0.8312795997776543,
+          "f1-score": 0.8317935879835259,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.832639951848961,
+          "recall": 0.8325875230323769,
+          "f1-score": 0.8324050092280433,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1712,
+          288
+        ],
+        [
+          348,
+          1451
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w30_c80_word13_char36",
+        "word_max_features": 30000,
+        "char_max_features": 80000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          6
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.6,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8307457873933846,
+      "fold_default_accuracy_std": 0.007451570457485591,
+      "oof_default_accuracy": 0.830744932877073,
+      "oof_threshold_accuracy": 0.8323242958673335,
+      "oof_default_macro_f1": 0.8297665897740939,
+      "oof_default_weighted_f1": 0.8304493917313813,
+      "oof_threshold_macro_f1": 0.8314730435270696,
+      "oof_threshold_weighted_f1": 0.8321067536025994,
+      "oof_roc_auc": 0.9042707059477487,
+      "threshold": -0.01062369686425317,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8293861768970517,
+          "recall": 0.858,
+          "f1-score": 0.8434504792332268,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8358381502890173,
+          "recall": 0.8037798777098388,
+          "f1-score": 0.8194956078209125,
+          "support": 1799.0
+        },
+        "accuracy": 0.8323242958673335,
+        "macro avg": {
+          "precision": 0.8326121635930346,
+          "recall": 0.8308899388549194,
+          "f1-score": 0.8314730435270696,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8324414809592118,
+          "recall": 0.8323242958673335,
+          "f1-score": 0.8321067536025994,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1716,
+          284
+        ],
+        [
+          353,
+          1446
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w30_c50_word14_char35",
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          4
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.8,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8302177380209417,
+      "fold_default_accuracy_std": 0.006021493515689892,
+      "oof_default_accuracy": 0.830218478546986,
+      "oof_threshold_accuracy": 0.8323242958673335,
+      "oof_default_macro_f1": 0.8292507528428243,
+      "oof_default_weighted_f1": 0.8299308677607842,
+      "oof_threshold_macro_f1": 0.8317905440512199,
+      "oof_threshold_weighted_f1": 0.8322918716915882,
+      "oof_roc_auc": 0.9049041133963313,
+      "threshold": -0.03796216486518796,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8385494287133631,
+          "recall": 0.844,
+          "f1-score": 0.8412658858709195,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8253079507278835,
+          "recall": 0.8193440800444691,
+          "f1-score": 0.8223152022315202,
+          "support": 1799.0
+        },
+        "accuracy": 0.8323242958673335,
+        "macro avg": {
+          "precision": 0.8319286897206233,
+          "recall": 0.8316720400222346,
+          "f1-score": 0.8317905440512199,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.832278984150089,
+          "recall": 0.8323242958673335,
+          "f1-score": 0.8322918716915882,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1688,
+          312
+        ],
+        [
+          325,
+          1474
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w50_c80_word14_char36",
+        "word_max_features": 50000,
+        "char_max_features": 80000,
+        "word_ngram_range": [
+          1,
+          4
+        ],
+        "char_ngram_range": [
+          3,
+          6
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.8,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8307457873933848,
+      "fold_default_accuracy_std": 0.006718488717600365,
+      "oof_default_accuracy": 0.830744932877073,
+      "oof_threshold_accuracy": 0.8320610687022901,
+      "oof_default_macro_f1": 0.8297665897740939,
+      "oof_default_weighted_f1": 0.8304493917313813,
+      "oof_threshold_macro_f1": 0.8312523253819196,
+      "oof_threshold_weighted_f1": 0.8318704143834195,
+      "oof_roc_auc": 0.9052940522512508,
+      "threshold": -0.010660137522070899,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8302618816682832,
+          "recall": 0.856,
+          "f1-score": 0.8429345150172329,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8341968911917098,
+          "recall": 0.8054474708171206,
+          "f1-score": 0.8195701357466063,
+          "support": 1799.0
+        },
+        "accuracy": 0.8320610687022901,
+        "macro avg": {
+          "precision": 0.8322293864299966,
+          "recall": 0.8307237354085604,
+          "f1-score": 0.8312523253819196,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8321252883891689,
+          "recall": 0.8320610687022901,
+          "f1-score": 0.8318704143834195,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1712,
+          288
+        ],
+        [
+          350,
+          1449
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w30_c50_word14_char35",
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          4
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.6,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8304815893488662,
+      "fold_default_accuracy_std": 0.0055479243404654875,
+      "oof_default_accuracy": 0.8304817057120295,
+      "oof_threshold_accuracy": 0.8320610687022901,
+      "oof_default_macro_f1": 0.8295222635413293,
+      "oof_default_weighted_f1": 0.8301989227564547,
+      "oof_threshold_macro_f1": 0.8312274147015914,
+      "oof_threshold_weighted_f1": 0.8318549969268365,
+      "oof_roc_auc": 0.9050867148415787,
+      "threshold": -0.01071686055817134,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.829622458857696,
+          "recall": 0.857,
+          "f1-score": 0.8430890309886867,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8349682631275245,
+          "recall": 0.8043357420789328,
+          "f1-score": 0.8193657984144961,
+          "support": 1799.0
+        },
+        "accuracy": 0.8320610687022901,
+        "macro avg": {
+          "precision": 0.8322953609926103,
+          "recall": 0.8306678710394664,
+          "f1-score": 0.8312274147015914,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8321539413218765,
+          "recall": 0.8320610687022901,
+          "f1-score": 0.8318549969268365,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1714,
+          286
+        ],
+        [
+          352,
+          1447
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w50_c80_word13_char35",
+        "word_max_features": 50000,
+        "char_max_features": 80000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.45,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8296928090978435,
+      "fold_default_accuracy_std": 0.007168800616540362,
+      "oof_default_accuracy": 0.8296920242168991,
+      "oof_threshold_accuracy": 0.8320610687022901,
+      "oof_default_macro_f1": 0.8287484105103109,
+      "oof_default_weighted_f1": 0.8294209862373472,
+      "oof_threshold_macro_f1": 0.8313937537216667,
+      "oof_threshold_weighted_f1": 0.8319549684124837,
+      "oof_roc_auc": 0.9055088938299055,
+      "threshold": -0.01663911165064482,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8341511285574092,
+          "recall": 0.85,
+          "f1-score": 0.8420009905894007,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8296422487223168,
+          "recall": 0.8121178432462479,
+          "f1-score": 0.8207865168539326,
+          "support": 1799.0
+        },
+        "accuracy": 0.8320610687022901,
+        "macro avg": {
+          "precision": 0.8318966886398631,
+          "recall": 0.8310589216231239,
+          "f1-score": 0.8313937537216667,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8320159680353426,
+          "recall": 0.8320610687022901,
+          "f1-score": 0.8319549684124837,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1700,
+          300
+        ],
+        [
+          338,
+          1461
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w30_c50_word13_char25",
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          2,
+          5
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.25,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.829691422231468,
+      "fold_default_accuracy_std": 0.008522744074757286,
+      "oof_default_accuracy": 0.8296920242168991,
+      "oof_threshold_accuracy": 0.8320610687022901,
+      "oof_default_macro_f1": 0.8287883479117943,
+      "oof_default_weighted_f1": 0.8294464600035555,
+      "oof_threshold_macro_f1": 0.8314378428601631,
+      "oof_threshold_weighted_f1": 0.8319801302812346,
+      "oof_roc_auc": 0.9105911617565313,
+      "threshold": -0.025478951954632803,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8354679802955665,
+          "recall": 0.848,
+          "f1-score": 0.8416873449131513,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.828151498021481,
+          "recall": 0.8143413007226237,
+          "f1-score": 0.8211883408071748,
+          "support": 1799.0
+        },
+        "accuracy": 0.8320610687022901,
+        "macro avg": {
+          "precision": 0.8318097391585237,
+          "recall": 0.8311706503613119,
+          "f1-score": 0.8314378428601631,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8320032917956771,
+          "recall": 0.8320610687022901,
+          "f1-score": 0.8319801302812346,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1696,
+          304
+        ],
+        [
+          334,
+          1465
+        ]
+      ]
+    },
+    {
+      "feature_config": {
+        "name": "expanded_w30_c80_word13_char36",
+        "word_max_features": 30000,
+        "char_max_features": 80000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          6
+        ],
+        "min_df": 1,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 0.8,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8294289577699188,
+      "fold_default_accuracy_std": 0.007650139785650324,
+      "oof_default_accuracy": 0.8294287970518558,
+      "oof_threshold_accuracy": 0.8320610687022901,
+      "oof_default_macro_f1": 0.8284769729086157,
+      "oof_default_weighted_f1": 0.8291530034838498,
+      "oof_threshold_macro_f1": 0.831264637002342,
+      "oof_threshold_weighted_f1": 0.8318779809551755,
+      "oof_roc_auc": 0.9041575875486382,
+      "threshold": -0.012264412345628427,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8305825242718446,
+          "recall": 0.8555,
+          "f1-score": 0.8428571428571429,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8338125359401956,
+          "recall": 0.8060033351862146,
+          "f1-score": 0.819672131147541,
+          "support": 1799.0
+        },
+        "accuracy": 0.8320610687022901,
+        "macro avg": {
+          "precision": 0.83219753010602,
+          "recall": 0.8307516675931073,
+          "f1-score": 0.831264637002342,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.8321120823111611,
+          "recall": 0.8320610687022901,
+          "f1-score": 0.8318779809551755,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1711,
+          289
+        ],
+        [
+          349,
+          1450
+        ]
+      ]
+    }
+  ]
+}

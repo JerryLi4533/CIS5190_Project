@@ -1,0 +1,98 @@
+{
+  "dataset_path": "/Users/Angie/Desktop/CIS5190_Project/data/raw/url_with_headlines.csv",
+  "dataset": {
+    "input_examples": 3805,
+    "used_examples": 3799,
+    "blank_examples": 4,
+    "dropped_blank_examples": 4,
+    "conflicting_duplicate_examples": 0,
+    "duplicate_headline_examples": 2,
+    "dropped_duplicate_headline_examples": 2,
+    "label_counts": {
+      "FoxNews": 2000,
+      "NBC": 1799
+    },
+    "text_mode": "headline"
+  },
+  "validation_protocol": "stratified_cv",
+  "selection_metric": "oof_threshold_accuracy",
+  "best_model": {
+    "model": "headline_tfidf_meta_linearsvc",
+    "classifier": {
+      "kind": "linearsvc",
+      "c": 0.8,
+      "class_weight": "balanced"
+    },
+    "feature_config": {
+      "word_max_features": 30000,
+      "char_max_features": 50000,
+      "meta_features": 36,
+      "word_ngram_range": [
+        1,
+        3
+      ],
+      "char_ngram_range": [
+        2,
+        5
+      ],
+      "text_mode": "headline"
+    },
+    "fold_default_accuracy_mean": 0.8336398308023023,
+    "fold_default_accuracy_std": 0.009664783320610592,
+    "oof_default_accuracy": 0.8336404316925506,
+    "oof_threshold_accuracy": 0.8373256120031587,
+    "oof_default_macro_f1": 0.8331640631297255,
+    "oof_threshold_macro_f1": 0.8370947946537707,
+    "oof_threshold_weighted_f1": 0.8374192302287847,
+    "oof_roc_auc": 0.9151486937187325,
+    "threshold": -0.03601250240406206,
+    "classification_report": {
+      "FoxNews": {
+        "precision": 0.8558187435633368,
+        "recall": 0.831,
+        "f1-score": 0.8432267884322678,
+        "support": 2000.0
+      },
+      "NBC": {
+        "precision": 0.8179859989229941,
+        "recall": 0.8443579766536965,
+        "f1-score": 0.8309628008752735,
+        "support": 1799.0
+      },
+      "accuracy": 0.8373256120031587,
+      "macro avg": {
+        "precision": 0.8369023712431654,
+        "recall": 0.8376789883268483,
+        "f1-score": 0.8370947946537707,
+        "support": 3799.0
+      },
+      "weighted avg": {
+        "precision": 0.8379032111579732,
+        "recall": 0.8373256120031587,
+        "f1-score": 0.8374192302287847,
+        "support": 3799.0
+      }
+    },
+    "confusion_matrix_labels": [
+      "FoxNews",
+      "NBC"
+    ],
+    "confusion_matrix": [
+      [
+        1662,
+        338
+      ],
+      [
+        280,
+        1519
+      ]
+    ]
+  },
+  "final_export": {
+    "num_features": 80036,
+    "threshold_exported_as_bias_shift": -0.03601250240406206,
+    "weights_path": "/Users/Angie/Desktop/CIS5190_Project/artifacts/model.pt",
+    "model_path": "/Users/Angie/Desktop/CIS5190_Project/submission/model.py",
+    "preprocess_path": "/Users/Angie/Desktop/CIS5190_Project/submission/preprocess.py"
+  }
+}

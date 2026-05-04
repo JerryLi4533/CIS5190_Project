@@ -2,76 +2,62 @@
 
 ## Goal
 
-Our goal was to improve holdout leaderboard accuracy for Project B while keeping the submission compatible with the course evaluator. The leaderboard metric is accuracy, so accuracy was the primary model-selection metric. We also tracked macro F1, weighted F1, ROC-AUC, per-class precision/recall/F1, and confusion matrices to check whether improvements were balanced across FoxNews and NBC.
+Our goal was to improve Project B leaderboard accuracy while keeping the final submission compatible with the course evaluator and the staff clarification that the backend provides `(url, headline)` and that the model can directly use the headline.
 
 ## Data Used
 
-We used the provided training file `data/raw/url_with_headlines.csv` as the only data used to fit the final TF-IDF vectorizer and LinearSVC classifier. This file contains URLs and headlines, with labels inferred from the source domain during local evaluation.
+We used the provided training file `data/raw/url_with_headlines.csv` to fit the final TF-IDF vectorizer and LinearSVC classifier. The URL column is used only to infer labels during local training/evaluation, not as an input feature to the final model.
 
-Based on course staff guidance, no leaderboard articles were scraped during or after January 2026. To create a no-overlap validation check, we also collected a separate post-January-2026 validation file, `data/raw/recent_validation.csv`, from official Fox News and NBC RSS feeds. This validation file was not used to fit the final model weights or vocabulary. It was used only to compare hyperparameters and choose the decision threshold.
+We also collected `data/raw/recent_validation.csv` from official Fox News and NBC RSS feeds as an extra stress-test dataset. It was not used to fit the final model weights or vocabulary.
 
 ## Preprocessing
 
-We improved preprocessing in four ways:
+The final submitted preprocessing is headline-only:
 
-1. Robust headline-column handling. The guideline screenshots suggest hidden/test data may contain columns such as `headline`, `scraped_headline`, `alternative_headline`, or `title`. The final preprocessing accepts all of these columns.
-2. Text normalization. We lowercase text, unescape HTML entities, remove HTML tags, normalize smart quotes/dashes, collapse whitespace, and remove trailing source suffixes such as `- Fox News`, `| NBC News`, or `- MSNBC`.
-3. Multiple headline fields. If several headline-like columns are present, we concatenate the unique non-empty values. This is label-independent, so the feature text does not use the true class label.
-4. URL slug features. In addition to headline text, the final model appends tokens from the URL slug. We strip direct source-domain tokens such as `foxnews`, `fox`, `nbcnews`, `nbc`, `www`, and `com`. We use only the slug text, not the domain.
+1. It accepts headline-like columns such as `headline`, `scraped_headline`, `alternative_headline`, and `title`.
+2. It lowercases text, unescapes HTML entities, removes HTML tags, normalizes smart quotes/dashes, and collapses whitespace.
+3. If multiple headline-like columns are present, it concatenates unique non-empty headline strings.
+4. It removes obvious source-leakage suffixes such as `| NBC Select`, `- NBC News`, `- Fox News`, `- Fox Business`, `- MSNBC`, and `- Today`.
+5. It adds 10 headline-only style features for length, capitalization, punctuation/标点符号 rate, comma/quote/colon/question/exclamation counts, and digit presence.
 
-The URL slug feature was the largest improvement. Headline-only models struggled on the post-January validation set, while headline plus source-stripped slug tokens generalized much better.
+The final model does not use URL slug/path tokens and does not use source-domain tokens as features.
 
 ## Model Search
 
-We started from the baseline linear classifier and moved to TF-IDF features with linear models because this design is simple, fast, interpretable, and compatible with the course backend. We compared Logistic Regression and LinearSVC, then focused on LinearSVC because it consistently performed better.
+We started from the baseline linear classifier and moved to TF-IDF features with linear models because this design is simple, fast, interpretable, and compatible with the course backend. We compared Logistic Regression and LinearSVC, then focused on LinearSVC because it performed better in validation.
 
-The final search varied:
-
-- word n-gram ranges: especially 1-3 and 1-4
-- character n-gram ranges: especially 2-5, 3-5, and 3-6
-- word vocabulary size: 30,000 to 50,000
-- character vocabulary size: 50,000 to 80,000
-- `min_df`: 1 and 2
-- LinearSVC regularization strength `C`
-- decision threshold on model scores
+The final search varied word n-gram ranges, character n-gram ranges, vocabulary sizes, `min_df`, LinearSVC regularization strength `C`, and the prediction threshold.
 
 The selected final model is:
 
-- classifier: LinearSVC
-- `C`: 1.5
+- classifier: average of two LinearSVC models exported as one PyTorch linear layer
+- `C`: 0.8 and 1.0
 - class weight: balanced
 - word TF-IDF: 1-3 grams, 30,000 features
 - character TF-IDF: 2-5 grams, 50,000 features
-- total feature dimension: 80,000
-- text mode: headline plus source-stripped URL slug tokens
-- threshold: -0.151807
+- headline style features: 10
+- total feature dimension: 80,010
+- text mode: headline only
+- threshold: 0.021191
 
 ## Validation Strategy
 
-Random 5-fold cross-validation on the provided training set is useful, but it can overestimate performance if similar headlines or collection artifacts appear across folds. To better approximate hidden-set behavior, we used the separate post-January-2026 validation set as a no-overlap check.
-
-This validation set is not a perfect simulation of the leaderboard, because course staff said the hidden leaderboard data was not scraped during or after January 2026. However, it is useful because it tests whether the model can generalize to newer headlines that are unlikely to overlap with the training set.
+We used 5-fold stratified cross-validation on the provided dataset for model selection. The decision threshold was tuned using out-of-fold scores only.
 
 ## Results
 
-Headline-only expanded TF-IDF with LinearSVC reached about 83.7% cross-validated accuracy on the provided training data. This suggested the text style alone had useful but limited signal.
+The final headline-only model achieved:
 
-Adding source-stripped URL slug tokens greatly improved performance:
+- 5-fold CV accuracy: 0.8421
+- macro F1: 0.8416
+- ROC-AUC: 0.9175
 
-- 5-fold CV on the provided data: about 98.9% accuracy for the final feature/model family
-- post-January validation accuracy after threshold tuning: 93.64%
-- post-January validation macro F1: 93.55%
-- post-January validation weighted F1: 93.61%
-- post-January validation ROC-AUC: 98.25%
-
-The local evaluator reports 100% accuracy on `url_with_headlines.csv`, but that is training-set evaluation and should not be reported as evidence of generalization. We only use it as a smoke test that the exported `model.py`, `preprocess.py`, and `model.pt` load correctly.
+The local evaluator reports 100% accuracy on `url_with_headlines.csv`, but that is training-set evaluation after fitting on all provided examples. It should only be treated as a smoke test that `model.py`, `preprocess.py`, and `model.pt` load correctly.
 
 ## Why We Kept This Model
 
-We kept the TF-IDF plus LinearSVC model instead of a transformer because it is lightweight, fast, compatible with the course submission format, and performed strongly on the no-overlap validation set. It also avoids depending on external model downloads or backend packages that may not exist in the course evaluator.
+We kept the headline-only TF-IDF plus LinearSVC ensemble because it follows staff guidance, removes source-leakage tokens, has no runtime dependency on `scikit-learn`, `scipy`, `nltk`, or `transformers`, and runs quickly in the leaderboard backend. The exported submission only needs `pandas` and `torch` at inference time.
 
-The most important improvement was not model complexity. It was better use of the available input format, especially robust preprocessing and source-stripped URL slug tokens.
+## Caveat
 
-## Important Caveat
-
-The URL slug is metadata from the provided URL, so we should describe it transparently in the report. We do not use the source domain itself, and we explicitly remove source-name tokens from the slug text. Still, this feature is stronger than headline-only text and should be framed as using all available text fields from the provided input rather than as a pure headline-only classifier.
+Headline-only source classification appears to have a natural ceiling around the mid-to-high 80s on this dataset. URL slug features can improve public leaderboard accuracy, but the final safe version avoids them because staff clarified that the backend provides headlines directly and source-leakage tokens should be removed.

@@ -39,7 +39,7 @@ Rows are true labels and columns are predicted labels.
 - Replaced the fixed single-split experiment with 5-fold stratified cross-validation.
 - Switched the best classifier from Logistic Regression to LinearSVC after empirical comparison.
 - Increased TF-IDF capacity and added word trigrams while keeping character n-grams.
-- Removed URL slug/path features from the final submission and kept the model headline-only.
+- Added optional URL-slug text features with source domains stripped.
 - Applied the same text cleaning during training and submission preprocessing.
 - Removed blank and duplicate cleaned headlines from training.
 - Tuned the decision threshold on out-of-fold scores to improve final accuracy.

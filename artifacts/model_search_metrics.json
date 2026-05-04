@@ -1,36 +1,23 @@
 {
-  "dataset_path": "C:\\Users\\User\\Desktop\\image\\CIS5190_Project\\data\\raw\\url_with_headlines.csv",
+  "dataset_path": "/Users/Angie/Desktop/CIS5190_Project/data/raw/url_with_headlines.csv",
   "dataset": {
     "input_examples": 3805,
-    "used_examples": 3805,
-    "blank_examples": 0,
-    "dropped_blank_examples": 0,
+    "used_examples": 3799,
+    "blank_examples": 4,
+    "dropped_blank_examples": 4,
     "conflicting_duplicate_examples": 0,
-    "duplicate_headline_examples": 0,
-    "dropped_duplicate_headline_examples": 0,
+    "duplicate_headline_examples": 2,
+    "dropped_duplicate_headline_examples": 2,
     "label_counts": {
       "FoxNews": 2000,
-      "NBC": 1805
+      "NBC": 1799
     },
-    "text_mode": "headline_url_slug"
+    "text_mode": "headline"
   },
-  "validation_dataset_path": "data\\raw\\recent_validation.csv",
-  "validation_dataset": {
-    "input_examples": 393,
-    "used_examples": 393,
-    "blank_examples": 0,
-    "dropped_blank_examples": 0,
-    "conflicting_duplicate_examples": 0,
-    "duplicate_headline_examples": 0,
-    "dropped_duplicate_headline_examples": 0,
-    "label_counts": {
-      "FoxNews": 213,
-      "NBC": 180
-    },
-    "text_mode": "headline_url_slug"
-  },
-  "validation_protocol": "holdout_csv",
-  "text_mode": "headline_url_slug",
+  "validation_dataset_path": null,
+  "validation_dataset": null,
+  "validation_protocol": "stratified_cv",
+  "text_mode": "headline",
   "cv_folds": 5,
   "quick": false,
   "search_mode": "expanded_tfidf_linearsvc",
@@ -43,7 +30,6 @@
     "roc_auc"
   ],
   "best_model": {
-    "validation_protocol": "holdout_csv",
     "feature_config": {
       "name": "expanded_w30_c50_word13_char25",
       "word_max_features": 30000,
@@ -58,48 +44,48 @@
       ],
       "min_df": 1,
       "sublinear_tf": true,
-      "text_mode": "headline_url_slug"
+      "text_mode": "headline"
     },
     "classifier_config": {
       "kind": "linearsvc",
-      "c": 1.5,
+      "c": 1.0,
       "class_weight": "balanced"
     },
-    "fold_default_accuracy_mean": 0.8880407124681934,
-    "fold_default_accuracy_std": 0.0,
-    "oof_default_accuracy": 0.8880407124681934,
-    "oof_threshold_accuracy": 0.9363867684478372,
-    "oof_default_macro_f1": 0.8840396995708155,
-    "oof_default_weighted_f1": 0.8858483766340137,
-    "oof_threshold_macro_f1": 0.935503141144729,
-    "oof_threshold_weighted_f1": 0.9361370476882631,
-    "oof_roc_auc": 0.9824986958789775,
-    "threshold": -0.1518065022994127,
+    "fold_default_accuracy_mean": 0.836007558421746,
+    "fold_default_accuracy_std": 0.008426669000730306,
+    "oof_default_accuracy": 0.8360094761779415,
+    "oof_threshold_accuracy": 0.8370623848381153,
+    "oof_default_macro_f1": 0.8350348923272984,
+    "oof_default_weighted_f1": 0.8357057531285973,
+    "oof_threshold_macro_f1": 0.8361724372180273,
+    "oof_threshold_weighted_f1": 0.8368112924738761,
+    "oof_roc_auc": 0.9114941634241245,
+    "threshold": -0.009247484989467827,
     "classification_report": {
       "FoxNews": {
-        "precision": 0.915929203539823,
-        "recall": 0.971830985915493,
-        "f1-score": 0.9430523917995444,
-        "support": 213.0
+        "precision": 0.8321308321308322,
+        "recall": 0.865,
+        "f1-score": 0.8482471193920078,
+        "support": 2000.0
       },
       "NBC": {
-        "precision": 0.9640718562874252,
-        "recall": 0.8944444444444445,
-        "f1-score": 0.9279538904899135,
-        "support": 180.0
+        "precision": 0.8430232558139535,
+        "recall": 0.8060033351862146,
+        "f1-score": 0.8240977550440466,
+        "support": 1799.0
       },
-      "accuracy": 0.9363867684478372,
+      "accuracy": 0.8370623848381153,
       "macro avg": {
-        "precision": 0.940000529913624,
-        "recall": 0.9331377151799687,
-        "f1-score": 0.935503141144729,
-        "support": 393.0
+        "precision": 0.8375770439723929,
+        "recall": 0.8355016675931073,
+        "f1-score": 0.8361724372180273,
+        "support": 3799.0
       },
       "weighted avg": {
-        "precision": 0.9379792735005569,
-        "recall": 0.9363867684478372,
-        "f1-score": 0.9361370476882631,
-        "support": 393.0
+        "precision": 0.8372888922008335,
+        "recall": 0.8370623848381153,
+        "f1-score": 0.8368112924738761,
+        "support": 3799.0
       }
     },
     "confusion_matrix_labels": [
@@ -108,25 +94,24 @@
     ],
     "confusion_matrix": [
       [
-        207,
-        6
+        1730,
+        270
       ],
       [
-        19,
-        161
+        349,
+        1450
       ]
     ]
   },
   "final_export": {
     "num_features": 80000,
-    "threshold_exported_as_bias_shift": -0.1518065022994127,
-    "weights_path": "C:\\Users\\User\\Desktop\\image\\CIS5190_Project\\artifacts\\model.pt",
-    "model_path": "C:\\Users\\User\\Desktop\\image\\CIS5190_Project\\submission\\model.py",
-    "preprocess_path": "C:\\Users\\User\\Desktop\\image\\CIS5190_Project\\submission\\preprocess.py"
+    "threshold_exported_as_bias_shift": -0.009247484989467827,
+    "weights_path": "/Users/Angie/Desktop/CIS5190_Project/artifacts/model.pt",
+    "model_path": "/Users/Angie/Desktop/CIS5190_Project/submission/model.py",
+    "preprocess_path": "/Users/Angie/Desktop/CIS5190_Project/submission/preprocess.py"
   },
   "all_results": [
     {
-      "validation_protocol": "holdout_csv",
       "feature_config": {
         "name": "expanded_w30_c50_word13_char25",
         "word_max_features": 30000,
@@ -141,48 +126,48 @@
         ],
         "min_df": 1,
         "sublinear_tf": true,
-        "text_mode": "headline_url_slug"
+        "text_mode": "headline"
       },
       "classifier_config": {
         "kind": "linearsvc",
-        "c": 1.5,
+        "c": 1.0,
         "class_weight": "balanced"
       },
-      "fold_default_accuracy_mean": 0.8880407124681934,
-      "fold_default_accuracy_std": 0.0,
-      "oof_default_accuracy": 0.8880407124681934,
-      "oof_threshold_accuracy": 0.9363867684478372,
-      "oof_default_macro_f1": 0.8840396995708155,
-      "oof_default_weighted_f1": 0.8858483766340137,
-      "oof_threshold_macro_f1": 0.935503141144729,
-      "oof_threshold_weighted_f1": 0.9361370476882631,
-      "oof_roc_auc": 0.9824986958789775,
-      "threshold": -0.1518065022994127,
+      "fold_default_accuracy_mean": 0.836007558421746,
+      "fold_default_accuracy_std": 0.008426669000730306,
+      "oof_default_accuracy": 0.8360094761779415,
+      "oof_threshold_accuracy": 0.8370623848381153,
+      "oof_default_macro_f1": 0.8350348923272984,
+      "oof_default_weighted_f1": 0.8357057531285973,
+      "oof_threshold_macro_f1": 0.8361724372180273,
+      "oof_threshold_weighted_f1": 0.8368112924738761,
+      "oof_roc_auc": 0.9114941634241245,
+      "threshold": -0.009247484989467827,
       "classification_report": {
         "FoxNews": {
-          "precision": 0.915929203539823,
-          "recall": 0.971830985915493,
-          "f1-score": 0.9430523917995444,
-          "support": 213.0
+          "precision": 0.8321308321308322,
+          "recall": 0.865,
+          "f1-score": 0.8482471193920078,
+          "support": 2000.0
         },
         "NBC": {
-          "precision": 0.9640718562874252,
-          "recall": 0.8944444444444445,
-          "f1-score": 0.9279538904899135,
-          "support": 180.0
+          "precision": 0.8430232558139535,
+          "recall": 0.8060033351862146,
+          "f1-score": 0.8240977550440466,
+          "support": 1799.0
         },
-        "accuracy": 0.9363867684478372,
+        "accuracy": 0.8370623848381153,
         "macro avg": {
-          "precision": 0.940000529913624,
-          "recall": 0.9331377151799687,
-          "f1-score": 0.935503141144729,
-          "support": 393.0
+          "precision": 0.8375770439723929,
+          "recall": 0.8355016675931073,
+          "f1-score": 0.8361724372180273,
+          "support": 3799.0
         },
         "weighted avg": {
-          "precision": 0.9379792735005569,
-          "recall": 0.9363867684478372,
-          "f1-score": 0.9361370476882631,
-          "support": 393.0
+          "precision": 0.8372888922008335,
+          "recall": 0.8370623848381153,
+          "f1-score": 0.8368112924738761,
+          "support": 3799.0
         }
       },
       "confusion_matrix_labels": [
@@ -191,17 +176,16 @@
       ],
       "confusion_matrix": [
         [
-          207,
-          6
+          1730,
+          270
         ],
         [
-          19,
-          161
+          349,
+          1450
         ]
       ]
     },
     {
-      "validation_protocol": "holdout_csv",
       "feature_config": {
         "name": "expanded_w50_c80_word13_char35",
         "word_max_features": 50000,
@@ -216,48 +200,48 @@
         ],
         "min_df": 1,
         "sublinear_tf": true,
-        "text_mode": "headline_url_slug"
+        "text_mode": "headline"
       },
       "classifier_config": {
         "kind": "linearsvc",
-        "c": 1.5,
+        "c": 1.0,
         "class_weight": "balanced"
       },
-      "fold_default_accuracy_mean": 0.8320610687022901,
-      "fold_default_accuracy_std": 0.0,
-      "oof_default_accuracy": 0.8320610687022901,
-      "oof_threshold_accuracy": 0.8727735368956743,
-      "oof_default_macro_f1": 0.8234068627450981,
-      "oof_default_weighted_f1": 0.8266894925909296,
-      "oof_threshold_macro_f1": 0.8716357460151555,
-      "oof_threshold_weighted_f1": 0.8726505324761588,
-      "oof_roc_auc": 0.9339853938445488,
-      "threshold": -0.255150939065534,
+      "fold_default_accuracy_mean": 0.8317984189723321,
+      "fold_default_accuracy_std": 0.006918210804425681,
+      "oof_default_accuracy": 0.8317978415372467,
+      "oof_threshold_accuracy": 0.8336404316925506,
+      "oof_default_macro_f1": 0.8309053389731632,
+      "oof_default_weighted_f1": 0.8315553136665718,
+      "oof_threshold_macro_f1": 0.8331734296831572,
+      "oof_threshold_weighted_f1": 0.8336404316925506,
+      "oof_roc_auc": 0.9061192329071708,
+      "threshold": -0.044355885455276994,
       "classification_report": {
         "FoxNews": {
-          "precision": 0.8755760368663594,
-          "recall": 0.892018779342723,
-          "f1-score": 0.8837209302325582,
-          "support": 213.0
+          "precision": 0.842,
+          "recall": 0.842,
+          "f1-score": 0.842,
+          "support": 2000.0
         },
         "NBC": {
-          "precision": 0.8693181818181818,
-          "recall": 0.85,
-          "f1-score": 0.8595505617977528,
-          "support": 180.0
+          "precision": 0.8243468593663146,
+          "recall": 0.8243468593663146,
+          "f1-score": 0.8243468593663146,
+          "support": 1799.0
         },
-        "accuracy": 0.8727735368956743,
+        "accuracy": 0.8336404316925506,
         "macro avg": {
-          "precision": 0.8724471093422705,
-          "recall": 0.8710093896713615,
-          "f1-score": 0.8716357460151555,
-          "support": 393.0
+          "precision": 0.8331734296831572,
+          "recall": 0.8331734296831572,
+          "f1-score": 0.8331734296831572,
+          "support": 3799.0
         },
         "weighted avg": {
-          "precision": 0.8727098437145224,
-          "recall": 0.8727735368956743,
-          "f1-score": 0.8726505324761588,
-          "support": 393.0
+          "precision": 0.8336404316925506,
+          "recall": 0.8336404316925506,
+          "f1-score": 0.8336404316925506,
+          "support": 3799.0
         }
       },
       "confusion_matrix_labels": [
@@ -266,17 +250,16 @@
       ],
       "confusion_matrix": [
         [
-          190,
-          23
+          1684,
+          316
         ],
         [
-          27,
-          153
+          316,
+          1483
         ]
       ]
     },
     {
-      "validation_protocol": "holdout_csv",
       "feature_config": {
         "name": "expanded_w30_c50_word13_char35",
         "word_max_features": 30000,
@@ -291,48 +274,48 @@
         ],
         "min_df": 1,
         "sublinear_tf": true,
-        "text_mode": "headline_url_slug"
+        "text_mode": "headline"
       },
       "classifier_config": {
         "kind": "linearsvc",
-        "c": 1.5,
+        "c": 1.0,
         "class_weight": "balanced"
       },
-      "fold_default_accuracy_mean": 0.8269720101781171,
-      "fold_default_accuracy_std": 0.0,
-      "oof_default_accuracy": 0.8269720101781171,
-      "oof_threshold_accuracy": 0.8625954198473282,
-      "oof_default_macro_f1": 0.8176184756497051,
-      "oof_default_weighted_f1": 0.821086640137768,
-      "oof_threshold_macro_f1": 0.8613666056963679,
-      "oof_threshold_weighted_f1": 0.8624625750742515,
-      "oof_roc_auc": 0.9294470526864893,
-      "threshold": -0.2600175268711864,
+      "fold_default_accuracy_mean": 0.8283756327577837,
+      "fold_default_accuracy_std": 0.006898325351685109,
+      "oof_default_accuracy": 0.828375888391682,
+      "oof_threshold_accuracy": 0.8336404316925506,
+      "oof_default_macro_f1": 0.8274181887907677,
+      "oof_default_weighted_f1": 0.828098392394244,
+      "oof_threshold_macro_f1": 0.8331640631297255,
+      "oof_threshold_weighted_f1": 0.8336357384062175,
+      "oof_roc_auc": 0.9048401889938854,
+      "threshold": -0.052826234341548636,
       "classification_report": {
         "FoxNews": {
-          "precision": 0.8663594470046083,
-          "recall": 0.8826291079812206,
-          "f1-score": 0.8744186046511628,
-          "support": 213.0
+          "precision": 0.8416583416583416,
+          "recall": 0.8425,
+          "f1-score": 0.8420789605197402,
+          "support": 2000.0
         },
         "NBC": {
-          "precision": 0.8579545454545454,
-          "recall": 0.8388888888888889,
-          "f1-score": 0.848314606741573,
-          "support": 180.0
+          "precision": 0.8247078464106845,
+          "recall": 0.8237909949972206,
+          "f1-score": 0.8242491657397107,
+          "support": 1799.0
         },
-        "accuracy": 0.8625954198473282,
+        "accuracy": 0.8336404316925506,
         "macro avg": {
-          "precision": 0.8621569962295769,
-          "recall": 0.8607589984350548,
-          "f1-score": 0.8613666056963679,
-          "support": 393.0
+          "precision": 0.8331830940345131,
+          "recall": 0.8331454974986103,
+          "f1-score": 0.8331640631297255,
+          "support": 3799.0
         },
         "weighted avg": {
-          "precision": 0.862509873775572,
-          "recall": 0.8625954198473282,
-          "f1-score": 0.8624625750742515,
-          "support": 393.0
+          "precision": 0.8336315080309303,
+          "recall": 0.8336404316925506,
+          "f1-score": 0.8336357384062175,
+          "support": 3799.0
         }
       },
       "confusion_matrix_labels": [
@@ -341,17 +324,16 @@
       ],
       "confusion_matrix": [
         [
-          188,
-          25
+          1685,
+          315
         ],
         [
-          29,
-          151
+          317,
+          1482
         ]
       ]
     },
     {
-      "validation_protocol": "holdout_csv",
       "feature_config": {
         "name": "expanded_w30_c50_word14_char35",
         "word_max_features": 30000,
@@ -366,48 +348,48 @@
         ],
         "min_df": 1,
         "sublinear_tf": true,
-        "text_mode": "headline_url_slug"
+        "text_mode": "headline"
       },
       "classifier_config": {
         "kind": "linearsvc",
-        "c": 1.5,
+        "c": 1.0,
         "class_weight": "balanced"
       },
-      "fold_default_accuracy_mean": 0.8269720101781171,
-      "fold_default_accuracy_std": 0.0,
-      "oof_default_accuracy": 0.8269720101781171,
-      "oof_threshold_accuracy": 0.8625954198473282,
-      "oof_default_macro_f1": 0.8176184756497051,
-      "oof_default_weighted_f1": 0.821086640137768,
-      "oof_threshold_macro_f1": 0.862037133347202,
-      "oof_threshold_weighted_f1": 0.8627740715273686,
-      "oof_roc_auc": 0.9293166405842463,
-      "threshold": -0.30454910180918504,
+      "fold_default_accuracy_mean": 0.8275861590735734,
+      "fold_default_accuracy_std": 0.005583161000973304,
+      "oof_default_accuracy": 0.8275862068965517,
+      "oof_threshold_accuracy": 0.8331139773624638,
+      "oof_default_macro_f1": 0.8266309256325404,
+      "oof_default_weighted_f1": 0.8273118175973144,
+      "oof_threshold_macro_f1": 0.8324729418350307,
+      "oof_threshold_weighted_f1": 0.8330212317967925,
+      "oof_roc_auc": 0.904648415786548,
+      "threshold": -0.028224324818391294,
       "classification_report": {
         "FoxNews": {
-          "precision": 0.8878048780487805,
-          "recall": 0.8544600938967136,
-          "f1-score": 0.8708133971291866,
-          "support": 213.0
+          "precision": 0.8357915437561455,
+          "recall": 0.85,
+          "f1-score": 0.842835894893406,
+          "support": 2000.0
         },
         "NBC": {
-          "precision": 0.8351063829787234,
-          "recall": 0.8722222222222222,
-          "f1-score": 0.8532608695652174,
-          "support": 180.0
+          "precision": 0.830028328611898,
+          "recall": 0.8143413007226237,
+          "f1-score": 0.8221099887766554,
+          "support": 1799.0
         },
-        "accuracy": 0.8625954198473282,
+        "accuracy": 0.8331139773624638,
         "macro avg": {
-          "precision": 0.861455630513752,
-          "recall": 0.8633411580594679,
-          "f1-score": 0.862037133347202,
-          "support": 393.0
+          "precision": 0.8329099361840218,
+          "recall": 0.8321706503613118,
+          "f1-score": 0.8324729418350307,
+          "support": 3799.0
         },
         "weighted avg": {
-          "precision": 0.8636681627495177,
-          "recall": 0.8625954198473282,
-          "f1-score": 0.8627740715273686,
-          "support": 393.0
+          "precision": 0.8330623981798093,
+          "recall": 0.8331139773624638,
+          "f1-score": 0.8330212317967925,
+          "support": 3799.0
         }
       },
       "confusion_matrix_labels": [
@@ -416,92 +398,16 @@
       ],
       "confusion_matrix": [
         [
-          182,
-          31
+          1700,
+          300
         ],
         [
-          23,
-          157
+          334,
+          1465
         ]
       ]
     },
     {
-      "validation_protocol": "holdout_csv",
-      "feature_config": {
-        "name": "expanded_w30_c50_word13_char35_min_df_2",
-        "word_max_features": 30000,
-        "char_max_features": 50000,
-        "word_ngram_range": [
-          1,
-          3
-        ],
-        "char_ngram_range": [
-          3,
-          5
-        ],
-        "min_df": 2,
-        "sublinear_tf": true,
-        "text_mode": "headline_url_slug"
-      },
-      "classifier_config": {
-        "kind": "linearsvc",
-        "c": 1.5,
-        "class_weight": "balanced"
-      },
-      "fold_default_accuracy_mean": 0.8320610687022901,
-      "fold_default_accuracy_std": 0.0,
-      "oof_default_accuracy": 0.8320610687022901,
-      "oof_threshold_accuracy": 0.8549618320610687,
-      "oof_default_macro_f1": 0.8220987654320988,
-      "oof_default_weighted_f1": 0.8256337762699086,
-      "oof_threshold_macro_f1": 0.85276545400769,
-      "oof_threshold_weighted_f1": 0.8542754639193878,
-      "oof_roc_auc": 0.9229264475743348,
-      "threshold": -0.269714766453281,
-      "classification_report": {
-        "FoxNews": {
-          "precision": 0.8421052631578947,
-          "recall": 0.9014084507042254,
-          "f1-score": 0.8707482993197279,
-          "support": 213.0
-        },
-        "NBC": {
-          "precision": 0.8727272727272727,
-          "recall": 0.8,
-          "f1-score": 0.8347826086956521,
-          "support": 180.0
-        },
-        "accuracy": 0.8549618320610687,
-        "macro avg": {
-          "precision": 0.8574162679425836,
-          "recall": 0.8507042253521127,
-          "f1-score": 0.85276545400769,
-          "support": 393.0
-        },
-        "weighted avg": {
-          "precision": 0.8561306110522664,
-          "recall": 0.8549618320610687,
-          "f1-score": 0.8542754639193878,
-          "support": 393.0
-        }
-      },
-      "confusion_matrix_labels": [
-        "FoxNews",
-        "NBC"
-      ],
-      "confusion_matrix": [
-        [
-          192,
-          21
-        ],
-        [
-          36,
-          144
-        ]
-      ]
-    },
-    {
-      "validation_protocol": "holdout_csv",
       "feature_config": {
         "name": "expanded_w50_c80_word14_char36",
         "word_max_features": 50000,
@@ -516,48 +422,48 @@
         ],
         "min_df": 1,
         "sublinear_tf": true,
-        "text_mode": "headline_url_slug"
+        "text_mode": "headline"
       },
       "classifier_config": {
         "kind": "linearsvc",
-        "c": 1.5,
+        "c": 1.0,
         "class_weight": "balanced"
       },
-      "fold_default_accuracy_mean": 0.8142493638676844,
-      "fold_default_accuracy_std": 0.0,
-      "oof_default_accuracy": 0.8142493638676844,
-      "oof_threshold_accuracy": 0.8524173027989822,
-      "oof_default_macro_f1": 0.8039685956173257,
-      "oof_default_weighted_f1": 0.8077382106424572,
-      "oof_threshold_macro_f1": 0.8513693270735525,
-      "oof_threshold_weighted_f1": 0.8524173027989822,
-      "oof_roc_auc": 0.9138758476786646,
-      "threshold": -0.24299916285489,
+      "fold_default_accuracy_mean": 0.8304815893488662,
+      "fold_default_accuracy_std": 0.006523213753444291,
+      "oof_default_accuracy": 0.8304817057120295,
+      "oof_threshold_accuracy": 0.8325875230323769,
+      "oof_default_macro_f1": 0.8295222635413293,
+      "oof_default_weighted_f1": 0.8301989227564547,
+      "oof_threshold_macro_f1": 0.8317935879835259,
+      "oof_threshold_weighted_f1": 0.8324050092280433,
+      "oof_roc_auc": 0.9052893274041134,
+      "threshold": -0.011594281831939295,
       "classification_report": {
         "FoxNews": {
-          "precision": 0.863849765258216,
-          "recall": 0.863849765258216,
-          "f1-score": 0.863849765258216,
-          "support": 213.0
+          "precision": 0.8310679611650486,
+          "recall": 0.856,
+          "f1-score": 0.8433497536945813,
+          "support": 2000.0
         },
         "NBC": {
-          "precision": 0.8388888888888889,
-          "recall": 0.8388888888888889,
-          "f1-score": 0.8388888888888889,
-          "support": 180.0
+          "precision": 0.8343875790684301,
+          "recall": 0.8065591995553085,
+          "f1-score": 0.8202374222724703,
+          "support": 1799.0
         },
-        "accuracy": 0.8524173027989822,
+        "accuracy": 0.8325875230323769,
         "macro avg": {
-          "precision": 0.8513693270735525,
-          "recall": 0.8513693270735525,
-          "f1-score": 0.8513693270735525,
-          "support": 393.0
+          "precision": 0.8327277701167393,
+          "recall": 0.8312795997776543,
+          "f1-score": 0.8317935879835259,
+          "support": 3799.0
         },
         "weighted avg": {
-          "precision": 0.8524173027989822,
-          "recall": 0.8524173027989822,
-          "f1-score": 0.8524173027989822,
-          "support": 393.0
+          "precision": 0.832639951848961,
+          "recall": 0.8325875230323769,
+          "f1-score": 0.8324050092280433,
+          "support": 3799.0
         }
       },
       "confusion_matrix_labels": [
@@ -566,17 +472,16 @@
       ],
       "confusion_matrix": [
         [
-          184,
-          29
+          1712,
+          288
         ],
         [
-          29,
-          151
+          348,
+          1451
         ]
       ]
     },
     {
-      "validation_protocol": "holdout_csv",
       "feature_config": {
         "name": "expanded_w30_c80_word13_char36",
         "word_max_features": 30000,
@@ -591,48 +496,48 @@
         ],
         "min_df": 1,
         "sublinear_tf": true,
-        "text_mode": "headline_url_slug"
+        "text_mode": "headline"
       },
       "classifier_config": {
         "kind": "linearsvc",
-        "c": 1.5,
+        "c": 1.0,
         "class_weight": "balanced"
       },
-      "fold_default_accuracy_mean": 0.806615776081425,
-      "fold_default_accuracy_std": 0.0,
-      "oof_default_accuracy": 0.806615776081425,
-      "oof_threshold_accuracy": 0.8422391857506362,
-      "oof_default_macro_f1": 0.7951440329218107,
-      "oof_default_weighted_f1": 0.7992146514623191,
-      "oof_threshold_macro_f1": 0.8401432845221225,
-      "oof_threshold_weighted_f1": 0.8416802787563659,
-      "oof_roc_auc": 0.9106677099634846,
-      "threshold": -0.20827114465951163,
+      "fold_default_accuracy_mean": 0.8304819360654602,
+      "fold_default_accuracy_std": 0.0066196876373591975,
+      "oof_default_accuracy": 0.8304817057120295,
+      "oof_threshold_accuracy": 0.8310081600421163,
+      "oof_default_macro_f1": 0.8295491533736861,
+      "oof_default_weighted_f1": 0.8302162103843872,
+      "oof_threshold_macro_f1": 0.830091761781622,
+      "oof_threshold_weighted_f1": 0.8307519626789673,
+      "oof_roc_auc": 0.9039772095608671,
+      "threshold": -0.001697387761086272,
       "classification_report": {
         "FoxNews": {
-          "precision": 0.8355555555555556,
-          "recall": 0.8826291079812206,
-          "f1-score": 0.8584474885844748,
-          "support": 213.0
+          "precision": 0.8267564966313763,
+          "recall": 0.859,
+          "f1-score": 0.8425698871996077,
+          "support": 2000.0
         },
         "NBC": {
-          "precision": 0.8511904761904762,
-          "recall": 0.7944444444444444,
-          "f1-score": 0.8218390804597702,
-          "support": 180.0
+          "precision": 0.8361417780360255,
+          "recall": 0.7998888271261813,
+          "f1-score": 0.8176136363636364,
+          "support": 1799.0
         },
-        "accuracy": 0.8422391857506362,
+        "accuracy": 0.8310081600421163,
         "macro avg": {
-          "precision": 0.8433730158730159,
-          "recall": 0.8385367762128325,
-          "f1-score": 0.8401432845221225,
-          "support": 393.0
+          "precision": 0.831449137333701,
+          "recall": 0.8294444135630906,
+          "f1-score": 0.830091761781622,
+          "support": 3799.0
         },
         "weighted avg": {
-          "precision": 0.8427165879074276,
-          "recall": 0.8422391857506362,
-          "f1-score": 0.8416802787563659,
-          "support": 393.0
+          "precision": 0.8312008560014642,
+          "recall": 0.8310081600421163,
+          "f1-score": 0.8307519626789673,
+          "support": 3799.0
         }
       },
       "confusion_matrix_labels": [
@@ -641,17 +546,90 @@
       ],
       "confusion_matrix": [
         [
-          188,
-          25
+          1718,
+          282
         ],
         [
-          37,
-          143
+          360,
+          1439
         ]
       ]
     },
     {
-      "validation_protocol": "holdout_csv",
+      "feature_config": {
+        "name": "expanded_w30_c50_word13_char35_min_df_2",
+        "word_max_features": 30000,
+        "char_max_features": 50000,
+        "word_ngram_range": [
+          1,
+          3
+        ],
+        "char_ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 2,
+        "sublinear_tf": true,
+        "text_mode": "headline"
+      },
+      "classifier_config": {
+        "kind": "linearsvc",
+        "c": 1.0,
+        "class_weight": "balanced"
+      },
+      "fold_default_accuracy_mean": 0.8207398932112892,
+      "fold_default_accuracy_std": 0.00792517632291778,
+      "oof_default_accuracy": 0.8207423006054225,
+      "oof_threshold_accuracy": 0.8241642537509871,
+      "oof_default_macro_f1": 0.8198186471391657,
+      "oof_default_weighted_f1": 0.8205011998844511,
+      "oof_threshold_macro_f1": 0.823699756071399,
+      "oof_threshold_weighted_f1": 0.8241785459872822,
+      "oof_roc_auc": 0.9004538632573653,
+      "threshold": -0.04411984534055345,
+      "classification_report": {
+        "FoxNews": {
+          "precision": 0.8340020060180542,
+          "recall": 0.8315,
+          "f1-score": 0.8327491236855283,
+          "support": 2000.0
+        },
+        "NBC": {
+          "precision": 0.8132963988919668,
+          "recall": 0.8160088938299055,
+          "f1-score": 0.8146503884572697,
+          "support": 1799.0
+        },
+        "accuracy": 0.8241642537509871,
+        "macro avg": {
+          "precision": 0.8236492024550105,
+          "recall": 0.8237544469149527,
+          "f1-score": 0.823699756071399,
+          "support": 3799.0
+        },
+        "weighted avg": {
+          "precision": 0.824196955420573,
+          "recall": 0.8241642537509871,
+          "f1-score": 0.8241785459872822,
+          "support": 3799.0
+        }
+      },
+      "confusion_matrix_labels": [
+        "FoxNews",
+        "NBC"
+      ],
+      "confusion_matrix": [
+        [
+          1663,
+          337
+        ],
+        [
+          331,
+          1468
+        ]
+      ]
+    },
+    {
       "feature_config": {
         "name": "expanded_w50_c80_word13_char36_min_df_2",
         "word_max_features": 50000,
@@ -666,48 +644,48 @@
         ],
         "min_df": 2,
         "sublinear_tf": true,
-        "text_mode": "headline_url_slug"
+        "text_mode": "headline"
       },
       "classifier_config": {
         "kind": "linearsvc",
-        "c": 1.5,
+        "c": 1.0,
         "class_weight": "balanced"
       },
-      "fold_default_accuracy_mean": 0.806615776081425,
-      "fold_default_accuracy_std": 0.0,
-      "oof_default_accuracy": 0.806615776081425,
-      "oof_threshold_accuracy": 0.8295165394402035,
-      "oof_default_macro_f1": 0.7946143690174937,
-      "oof_default_weighted_f1": 0.7987832788397016,
-      "oof_threshold_macro_f1": 0.8251651671591249,
-      "oof_threshold_weighted_f1": 0.827481220147441,
-      "oof_roc_auc": 0.9050339071465832,
-      "threshold": -0.20619993989437826,
+      "fold_default_accuracy_mean": 0.8188977879481312,
+      "fold_default_accuracy_std": 0.008713331954026939,
+      "oof_default_accuracy": 0.8188997104501184,
+      "oof_threshold_accuracy": 0.8231113450908134,
+      "oof_default_macro_f1": 0.8179457560666824,
+      "oof_default_weighted_f1": 0.8186430099978483,
+      "oof_threshold_macro_f1": 0.8229862295627575,
+      "oof_threshold_weighted_f1": 0.8232352218512647,
+      "oof_roc_auc": 0.8994027237354085,
+      "threshold": -0.10394943294857814,
       "classification_report": {
         "FoxNews": {
-          "precision": 0.8016528925619835,
-          "recall": 0.9107981220657277,
-          "f1-score": 0.8527472527472527,
-          "support": 213.0
+          "precision": 0.8494736842105263,
+          "recall": 0.807,
+          "f1-score": 0.8276923076923077,
+          "support": 2000.0
         },
         "NBC": {
-          "precision": 0.8741721854304636,
-          "recall": 0.7333333333333333,
-          "f1-score": 0.797583081570997,
-          "support": 180.0
+          "precision": 0.7967351237493417,
+          "recall": 0.8410227904391329,
+          "f1-score": 0.8182801514332071,
+          "support": 1799.0
         },
-        "accuracy": 0.8295165394402035,
+        "accuracy": 0.8231113450908134,
         "macro avg": {
-          "precision": 0.8379125389962235,
-          "recall": 0.8220657276995305,
-          "f1-score": 0.8251651671591249,
-          "support": 393.0
+          "precision": 0.823104403979934,
+          "recall": 0.8240113952195665,
+          "f1-score": 0.8229862295627575,
+          "support": 3799.0
         },
         "weighted avg": {
-          "precision": 0.8348678358605239,
-          "recall": 0.8295165394402035,
-          "f1-score": 0.827481220147441,
-          "support": 393.0
+          "precision": 0.8244995672666803,
+          "recall": 0.8231113450908134,
+          "f1-score": 0.8232352218512647,
+          "support": 3799.0
         }
       },
       "confusion_matrix_labels": [
@@ -716,12 +694,12 @@
       ],
       "confusion_matrix": [
         [
-          194,
-          19
+          1614,
+          386
         ],
         [
-          48,
-          132
+          286,
+          1513
         ]
       ]
     }

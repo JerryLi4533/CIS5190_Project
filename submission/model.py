@@ -5,7 +5,7 @@ from typing import Iterable, List
 import torch
 from torch import nn
 
-NUM_FEATURES = 80000
+NUM_FEATURES = 80010
 NUM_CLASSES = 2
 LABELS = ["FoxNews", "NBC"]
 
