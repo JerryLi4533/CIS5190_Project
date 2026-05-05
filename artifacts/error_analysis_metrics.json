@@ -1,0 +1,66 @@
+{
+  "dataset_path": "C:\\Users\\jerry\\Documents\\UPenn\\CIS 5190\\project\\news-source-classification\\data\\raw\\url_with_headlines.csv",
+  "dataset": {
+    "input_examples": 3805,
+    "used_examples": 3799,
+    "blank_examples": 4,
+    "conflicting_duplicate_examples": 0,
+    "duplicate_headline_examples": 2,
+    "label_counts": {
+      "FoxNews": 2000,
+      "NBC": 1799
+    }
+  },
+  "model": "headline_simple_meta_ensemble_recreated_oof",
+  "classifier_c_values": [
+    0.8,
+    1.0
+  ],
+  "feature_config": {
+    "word_max_features": 30000,
+    "char_max_features": 50000,
+    "meta_features": 10,
+    "word_ngram_range": [
+      1,
+      3
+    ],
+    "char_ngram_range": [
+      2,
+      5
+    ],
+    "text_mode": "headline"
+  },
+  "threshold": -0.0433789650396057,
+  "num_examples": 3799,
+  "num_errors": 611,
+  "accuracy": 0.8391682021584628,
+  "macro_f1": 0.8390282927216268,
+  "roc_auc": 0.9175575319622012,
+  "confusion_matrix_labels": [
+    "FoxNews",
+    "NBC"
+  ],
+  "confusion_matrix": [
+    [
+      1650,
+      350
+    ],
+    [
+      261,
+      1538
+    ]
+  ],
+  "error_direction_counts": {
+    "FoxNews->NBC": 350,
+    "NBC->FoxNews": 261
+  },
+  "error_topic_counts": {
+    "politics": 253,
+    "other": 237,
+    "world": 54,
+    "crime": 36,
+    "health": 17,
+    "culture": 9,
+    "business": 5
+  }
+}

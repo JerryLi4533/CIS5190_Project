@@ -1,0 +1,279 @@
+{
+  "dataset_path": "C:\\Users\\jerry\\Documents\\UPenn\\CIS 5190\\project\\news-source-classification\\data\\raw\\url_with_headlines.csv",
+  "dataset": {
+    "input_examples": 3805,
+    "used_examples": 3799,
+    "blank_examples": 4,
+    "conflicting_duplicate_examples": 0,
+    "duplicate_headline_examples": 2,
+    "label_counts": {
+      "FoxNews": 2000,
+      "NBC": 1799
+    }
+  },
+  "model": "politics_specialist_experiment",
+  "classifier_c_values": [
+    0.8,
+    1.0
+  ],
+  "feature_config": {
+    "word_max_features": 30000,
+    "char_max_features": 50000,
+    "meta_features": 10,
+    "word_ngram_range": [
+      1,
+      3
+    ],
+    "char_ngram_range": [
+      2,
+      5
+    ],
+    "text_mode": "headline"
+  },
+  "politics_examples": 1322,
+  "politics_label_counts": {
+    "FoxNews": 754,
+    "NBC": 568
+  },
+  "general_model_on_politics": {
+    "threshold": -0.0433789650396057,
+    "accuracy": 0.8086232980332829,
+    "macro_f1": 0.8058143187163516,
+    "roc_auc": 0.8874617065789965,
+    "confusion_matrix_labels": [
+      "FoxNews",
+      "NBC"
+    ],
+    "confusion_matrix": [
+      [
+        614,
+        140
+      ],
+      [
+        113,
+        455
+      ]
+    ]
+  },
+  "politics_specialist": {
+    "threshold": -0.11889836822256594,
+    "accuracy": 0.7957639939485628,
+    "macro_f1": 0.7948130127662706,
+    "roc_auc": 0.872550622034595,
+    "confusion_matrix_labels": [
+      "FoxNews",
+      "NBC"
+    ],
+    "confusion_matrix": [
+      [
+        571,
+        183
+      ],
+      [
+        87,
+        481
+      ]
+    ]
+  },
+  "routed_general_plus_politics_specialist": {
+    "accuracy": 0.8346933403527244,
+    "macro_f1": 0.8346721594572404,
+    "roc_auc": 0.9136700944969428,
+    "confusion_matrix_labels": [
+      "FoxNews",
+      "NBC"
+    ],
+    "confusion_matrix": [
+      [
+        1607,
+        393
+      ],
+      [
+        235,
+        1564
+      ]
+    ]
+  },
+  "top_politics_specialist_errors": [
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 1.4670618882547521,
+      "headline": "'Lock him up!': Hillary Clinton smiles and nods amid chants echoing Trump supporters"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 1.1566148048996774,
+      "headline": "'Gutfeld!' draws largest audience in program history with Trump appearance"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 1.1155836238911179,
+      "headline": "Biden\u2019s moral equivalency between Israel and the Palestinians will result in failure again"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 1.069697173822869,
+      "headline": "Biden pledges $7.3B in 'clean energy' spending with national debt at $35T"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 1.0462510784562693,
+      "headline": "Zelenskyy downplays comment that Trump doesn't know how to end Russia's war with Ukraine"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 1.0454135583230006,
+      "headline": "Republicans 'skeptical' of DOJ move to block Russian election interference"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 1.0182460027052391,
+      "headline": "Pence declines to endorse Trump, won't back Biden"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 1.0073591710093623,
+      "headline": "Bill Maher: Trump is 'right' about the dangerous rhetoric aimed at him, 'but he is a threat to democracy!'"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.9960965352073431,
+      "headline": "Local residents explode at Biden officials over plan to release grizzly bears near their communities"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 0.9331869610111276,
+      "headline": "Inside the poll numbers: Which key groups have moved and which ones haven't since Biden's exit"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.9295897213438675,
+      "headline": "The unnoticed election that could determine the future"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.9215527792721668,
+      "headline": "Biden is clearly in poor health. We deserve an honest and transparent report"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 0.9213217458126817,
+      "headline": "Biden gives historic interview to LGBTQ newspaper"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.9120648131190279,
+      "headline": "Trump safe after 'gunshots in his vicinity,' campaign says"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.8888315027504584,
+      "headline": "Blind Michigan judge drives race car and inspires others to follow their dreams, too"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.8793570220996327,
+      "headline": "Assassination expert says Trump had \u2018triple the Secret Service\u2019 JFK had and still came an inch from death"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.8789022027077052,
+      "headline": "JD Vance speaks at RNC on Day 3; Donald Trump's granddaughter Kai gives speech"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.8323461611487181,
+      "headline": "Trump says he 'probably took a bullet to the head' due to Dem rhetoric"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 0.8295314661226388,
+      "headline": "Poll: Half of Gen Z voters support Harris, one third back Trump"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.8124560781503016,
+      "headline": "Three Harris DNC attack lines against Trump that were inaccurate or false"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.7522838392476517,
+      "headline": "Biden praises Florida Gov. Ron DeSantis as \u2018very gracious\u2019 amid hurricane relief effort"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.748453713594368,
+      "headline": "Biden awards first Medal of Honor to Korean War hero"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 0.7395156679214067,
+      "headline": "Harris leads Trump by almost 40 points among Asian American voters, a new poll shows"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.7350366114322684,
+      "headline": "Charlamagne tha God says young Black man predicted Trump's podcast appearance will get him elected"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.7345601311558817,
+      "headline": "Trump visits Atlanta Chick fil A, buys customers chicken and shakes"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.7331161485541375,
+      "headline": "Wisconsin kicks off election season with first widely available absentee ballots"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 0.7228019358933354,
+      "headline": "From 'rapists' to 'eating the pets': Trump has long used degrading language toward immigrants"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.7180705154155165,
+      "headline": "Biden to take executive action on abortion access following immense pressure from Democrats"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.7147734006647704,
+      "headline": "Biden ends bid for second term in White House as he drops out of his 2024 rematch with Trump"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.6992731709479709,
+      "headline": "Early voting means 'election season' has already begun"
+    }
+  ]
+}

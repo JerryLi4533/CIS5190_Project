@@ -1,0 +1,331 @@
+{
+  "dataset_path": "C:\\Users\\jerry\\Documents\\UPenn\\CIS 5190\\project\\news-source-classification\\data\\raw\\url_with_headlines.csv",
+  "dataset": {
+    "input_examples": 3805,
+    "used_examples": 3799,
+    "blank_examples": 4,
+    "conflicting_duplicate_examples": 0,
+    "duplicate_headline_examples": 2,
+    "label_counts": {
+      "FoxNews": 2000,
+      "NBC": 1799
+    }
+  },
+  "model": "enhanced_politics_features_experiment",
+  "classifier_c_values": [
+    0.8,
+    1.0
+  ],
+  "feature_config": {
+    "word_max_features": 30000,
+    "char_max_features": 50000,
+    "baseline_meta_features": 10,
+    "enhanced_meta_features": 30,
+    "word_ngram_range": [
+      1,
+      3
+    ],
+    "char_ngram_range": [
+      2,
+      5
+    ],
+    "text_mode": "headline",
+    "mojibake_repair": true
+  },
+  "baseline_10_meta": {
+    "threshold": -0.0433789650396057,
+    "accuracy": 0.8391682021584628,
+    "macro_f1": 0.8390282927216268,
+    "roc_auc": 0.9175575319622012,
+    "confusion_matrix_labels": [
+      "FoxNews",
+      "NBC"
+    ],
+    "confusion_matrix": [
+      [
+        1650,
+        350
+      ],
+      [
+        261,
+        1538
+      ]
+    ],
+    "num_errors": 611
+  },
+  "enhanced_politics_meta": {
+    "threshold": 0.039975507814536626,
+    "accuracy": 0.8373256120031587,
+    "macro_f1": 0.8367323692138225,
+    "roc_auc": 0.9160547526403559,
+    "confusion_matrix_labels": [
+      "FoxNews",
+      "NBC"
+    ],
+    "confusion_matrix": [
+      [
+        1705,
+        295
+      ],
+      [
+        323,
+        1476
+      ]
+    ],
+    "num_errors": 618
+  },
+  "baseline_politics_subset": {
+    "examples": 1322,
+    "accuracy": 0.8086232980332829,
+    "macro_f1": 0.8058143187163516,
+    "roc_auc": 0.8874617065789965,
+    "num_errors": 253,
+    "confusion_matrix_labels": [
+      "FoxNews",
+      "NBC"
+    ],
+    "confusion_matrix": [
+      [
+        614,
+        140
+      ],
+      [
+        113,
+        455
+      ]
+    ]
+  },
+  "enhanced_politics_subset": {
+    "examples": 1322,
+    "accuracy": 0.7995461422087746,
+    "macro_f1": 0.7943062408002053,
+    "roc_auc": 0.8833755183621623,
+    "num_errors": 265,
+    "confusion_matrix_labels": [
+      "FoxNews",
+      "NBC"
+    ],
+    "confusion_matrix": [
+      [
+        634,
+        120
+      ],
+      [
+        145,
+        423
+      ]
+    ]
+  },
+  "top_enhanced_errors": [
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 2.056458745852242,
+      "topic": "politics",
+      "headline": "White House says Trump\u2019s tariffs will destroy manufacturing, exacerbate inflation"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 1.9953979467416465,
+      "topic": "other",
+      "headline": "Schiff's powerful closing speech: 'Is there one among you who will say, Enough!'?"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 1.706480577748787,
+      "topic": "other",
+      "headline": "How to score cheap stuff (to keep or resell)"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 1.5434910094477785,
+      "topic": "politics",
+      "headline": "Trump says presidential civilian award is 'better' than top military honor whose recipients are 'dead' or 'hit' by bullets"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 1.4217682267313498,
+      "topic": "other",
+      "headline": "Chuck Schumer appeals to Harris to attend Al Smith dinner at request of prominent Cardinal"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 1.397538104315704,
+      "topic": "other",
+      "headline": "Kamala Harris defends her policy changes in first interview: 'My values have not changed'"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 1.2414182528272466,
+      "topic": "politics",
+      "headline": "Pence declines to endorse Trump, won't back Biden"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 1.1812404413357966,
+      "topic": "other",
+      "headline": "2024 Olympics: Simone Biles takes gold in vault, Sha'Carri Richardson gets silver in 100 meter"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 1.1746673156221492,
+      "topic": "other",
+      "headline": "'I'm not a progressive': Fetterman breaks with the left, showing a maverick side"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 1.1594802569125644,
+      "topic": "health",
+      "headline": "'God help us': Displaced Gazans who fled bombardment now face health crisis in a makeshift tent city"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 1.1274105214097085,
+      "topic": "world",
+      "headline": "My parents were kidnapped by Hamas. They are not a footnote to Gaza war, they are its essence"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 1.1025209290449989,
+      "topic": "other",
+      "headline": "'We are the underdogs': Harris introduces running mate Walz as a coach, veteran and protector of reproductive rights"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 1.0353847234562439,
+      "topic": "other",
+      "headline": "Democratic heavyweights to speak at party's convention; preparing for large Palestinian protests"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 1.0240029208999566,
+      "topic": "other",
+      "headline": "Meet the Hurricane Milton babies born at Florida hospitals during the storm"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 1.0120248502221147,
+      "topic": "politics",
+      "headline": "White House condemns university presidents after contentious congressional hearing on antisemitism"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 0.9867113063092393,
+      "topic": "politics",
+      "headline": "Harris makes surprise early appearance, thanks Biden for his service"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.985935367480555,
+      "topic": "politics",
+      "headline": "Trump visits Atlanta Chick fil A, buys customers chicken and shakes"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.963787748114609,
+      "topic": "world",
+      "headline": "Turkey's Erdogan threatens to invade Israel over war in Gaza as regional tensions grow"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 0.9629703841149816,
+      "topic": "politics",
+      "headline": "'Lock him up!': Hillary Clinton smiles and nods amid chants echoing Trump supporters"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.9615335152274932,
+      "topic": "politics",
+      "headline": "Biden\u2019s moral equivalency between Israel and the Palestinians will result in failure again"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 0.9547805979388057,
+      "topic": "culture",
+      "headline": "In college football showdown, Texas will try beating Georgia at its own game"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.9462227063340506,
+      "topic": "other",
+      "headline": "'Tough call': Atlanta voters split on who will win Georgia"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 0.9287360192125399,
+      "topic": "politics",
+      "headline": "Evangelical environmentalists push for climate votes as election nears: 'Care for God's creation'"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.9270136516514668,
+      "topic": "other",
+      "headline": "Arizona abortion rights group secures signatures for 2024 ballot referendum"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 0.9133685626663933,
+      "topic": "politics",
+      "headline": "Inside the poll numbers: Which key groups have moved and which ones haven't since Biden's exit"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.9101758613929517,
+      "topic": "politics",
+      "headline": "Trump, Biden face tests in final 2024 presidential primaries"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.8847784370360039,
+      "topic": "world",
+      "headline": "South Korean intelligence says North has sent troops to aid Russia\u2019s war in Ukraine"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 0.8676254947375971,
+      "topic": "crime",
+      "headline": "'I was slipping in people's blood': Police officer describes battling rioters after Capitol became a 'war scene'"
+    },
+    {
+      "label": "NBC",
+      "predicted_label": "FoxNews",
+      "confidence_margin": 0.8652630096191029,
+      "topic": "other",
+      "headline": "Pro Hamas group that helped organize college protests is a 'sham charity,' Treasury says"
+    },
+    {
+      "label": "FoxNews",
+      "predicted_label": "NBC",
+      "confidence_margin": 0.8576459579765856,
+      "topic": "politics",
+      "headline": "Trump says he 'probably took a bullet to the head' due to Dem rhetoric"
+    }
+  ]
+}
