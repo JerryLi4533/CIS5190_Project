@@ -51,24 +51,33 @@
 
 
 \begin{document}
-\head{Spring 2026}{[Report Title]}{Team Members: Jerry Li, Yikai Ding, Jier Yin}{Project: News Source Classification}
+\head{Spring 2026}{News Source Classification Project Report}{Team Members: Jerry Li, Yikai Ding, Jier Yin}{Project: News Source Classification}
 
 \section{Introduction}
 This project studies binary news source classification: given only the headline of a news article, the goal is to predict whether it was published by Fox News or NBC News. The task is challenging because headlines are short, often refer to overlapping events and public figures, and provide only limited context beyond wording, framing, and editorial style.
 
 Our approach builds a reproducible text classification pipeline around cleaned headline text, TF-IDF word and character n-gram features, and linear classifiers. We iteratively compared baseline and improved models, selected the final model using accuracy-focused validation, and exported the resulting classifier into the required Project B submission format. Beyond leaderboard performance, our experiments focus on understanding which text features and modeling choices are most useful for headline-only source prediction.
 
+\subsection*{Code and Data Links}
+\textbf{Code Link:} \href{https://drive.google.com/drive/folders/13gnLsAkTN4MkBU17H3Kkb2pxDgQ4y-Hy}{Project Code Folder}
+
+\textbf{Collected Dataset Link:} \href{https://huggingface.co/datasets/yikai0302/url_with_headlines/blob/main/url_with_headlines.csv}{Collected Dataset Folder}
+
 \section{Core Components}
 
 \subsection{Data Collection and Dataset}
-We used the provided Project B URL dataset as the starting point and constructed a headline classification dataset from Fox News and NBC News articles. Each example contains a URL and its corresponding headline, and the label is inferred from the source domain. The final raw dataset contains 3,805 examples: 2,000 from Fox News and 1,805 from NBC News. During training experiments, we standardized text by lowercasing, normalizing whitespace, and replacing common typographic variants such as curly quotes and dashes. For the final cross-validation experiments, we removed 4 blank headlines and 2 duplicate cleaned headlines, leaving 3,799 usable examples.
+We used the provided Project B URL dataset as the starting point and constructed a headline classification dataset from Fox News and NBC News articles. Each example contains a URL and its corresponding headline, and the label is inferred from the source domain. The raw dataset contains 3,805 examples: 2,000 from Fox News and 1,805 from NBC News. For the final headline-only pipeline, we removed 4 blank headlines and 2 duplicate cleaned headlines, leaving 3,799 usable examples.
+
+The submitted preprocessing is headline-only and accepts multiple headline-like columns, including \texttt{headline}, \texttt{scraped\_headline}, \texttt{alternative\_headline}, and \texttt{title}. We lowercase text, unescape HTML entities, remove HTML tags, normalize smart quotes and dashes, collapse whitespace, and strip obvious source-leakage suffixes such as ``- NBC News'' and ``- Fox News.'' If multiple headline-like columns are present, we concatenate unique non-empty headline strings. This design keeps the final submission aligned with the course backend while avoiding URL-based leakage features.
 
 For early experiments, we used an 80/20 stratified train-validation split with random seed 42 so that both classes were represented proportionally. For final model selection, we moved to 5-fold stratified cross-validation, which gives a more stable estimate on a relatively small dataset and better matches the leaderboard goal of generalizing to unseen headlines.
 
 \subsection{Model Design}
 Our first implementation was a simple linear PyTorch classifier trained with cross-entropy loss. This model served as a local baseline and verified that the preprocessing, model, and evaluator interfaces worked end-to-end. We then switched to sparse TF-IDF features and linear classifiers, which are well suited to short text classification because they can capture topic words, named entities, and source-specific phrasing without requiring a large training set.
 
-The final model combines word-level TF-IDF features and character-level TF-IDF features. The word vectorizer uses unigrams, bigrams, and trigrams with up to 20,000 features, while the character vectorizer uses character 3--5 grams with up to 30,000 features. We compared Logistic Regression and LinearSVC classifiers under multiple regularization settings. The best model was a LinearSVC with $C=0.45$ and balanced class weights. We also tuned the decision threshold on out-of-fold validation scores, then exported the final linear decision function into a PyTorch \texttt{nn.Linear} layer so that the submitted \texttt{model.py}, \texttt{preprocess.py}, and \texttt{model.pt} follow the course evaluation contract.
+The final model combines word-level TF-IDF features, character-level TF-IDF features, and a small set of headline style features. The word vectorizer uses word 1--3 grams with 30,000 features, while the character vectorizer uses character 2--5 grams with 50,000 features. We also add 10 headline-only style features that capture length, capitalization, punctuation rate, comma and quote counts, colon/question/exclamation counts, and digit presence. These features give a total input dimension of 80,010.
+
+We compared Logistic Regression and LinearSVC classifiers under multiple regularization settings and selected a headline-only ensemble formed by averaging two balanced LinearSVC models with $C=0.8$ and $C=1.0$. The decision threshold was tuned on out-of-fold validation scores, with the final threshold set to 0.021191. To satisfy the course evaluator contract, we exported the averaged linear decision function into a PyTorch \texttt{nn.Linear} layer, so the submitted \texttt{model.py}, \texttt{preprocess.py}, and \texttt{model.pt} run without requiring \texttt{scikit-learn} at inference time.
 
 \subsection{Evaluation and Model Performance}
 Accuracy was the primary selection metric because Project B is evaluated by classification accuracy. We also tracked macro F1, weighted F1, per-class precision and recall, and confusion matrices to understand whether improvements were balanced across both outlets. Table~\ref{tab:model-results} summarizes the main model iterations.
@@ -83,43 +92,104 @@ Model & Evaluation protocol & Accuracy & Notes \\
 Course baseline & Provided reference & 0.6649 & TF-IDF + Logistic Regression \\
 Local linear baseline & 80/20 split & 0.7359 & PyTorch linear classifier \\
 TF-IDF + Logistic Regression & 80/20 split & 0.8121 & Word + character n-grams \\
-TF-IDF + LinearSVC & 5-fold CV & 0.8313 & Final selected model \\
+Headline-only LinearSVC ensemble & 5-fold CV & 0.8421 & Word 1--3 + char 2--5 + 10 style features \\
 \hline
 \end{tabular*}
 \caption{Summary of the main model iterations. Accuracy is reported using the validation protocol listed for each row.}
 \label{tab:model-results}
 \end{table}
 
-The final LinearSVC model achieved 0.8313 cross-validated accuracy, 0.8308 macro F1, and 0.8313 weighted F1. Its per-class F1 scores were 0.8395 for Fox News and 0.8221 for NBC, suggesting that the model performs reasonably well on both classes while still slightly favoring Fox News. The cross-validated confusion matrix contained 1,677 correctly classified Fox News headlines, 1,481 correctly classified NBC headlines, 323 Fox News headlines predicted as NBC, and 318 NBC headlines predicted as Fox News. Based on these results, we selected the LinearSVC model as the final submission model.
+The final headline-only LinearSVC ensemble achieved 0.8421 cross-validated accuracy, 0.8416 macro F1, and 0.9175 ROC-AUC. Because the final model uses only cleaned headline text and headline-derived style features, it remains compatible with the staff guidance that the backend provides headline information directly. Based on these results, we selected this ensemble as the final submission model.
 
 \section{Exploratory Components}
 
-For each of your exploratory components, you will describe the following in the report. The specific format of this section is left to you, so use a format that is convenient for you to describe the following:
-\begin{itemize}
-\item \textbf{Code}: Summarize your motivation for code modifications, such as porting to a new language or improving efficiency, and describe your approach, focusing on major implementation choices. Discuss specific challenges encountered and solutions implemented during development. Present benchmarks or comparisons showing the impact of your contributions on performance or usability.
-\item \textbf{Technique}: State the modeling or algorithmic innovation explored, including its theoretical motivation or inspiration from previous literature. Outline the main steps for implementation and validation of the new technique, and highlight any key design decisions or parameter choices. Briefly summarize results from experiments or ablation studies, comparing them to baseline performance.
-\item \textbf{Analysis}: Describe the research question or hypothesis you investigated, and detail the experimental design or analytical methods used to address it. Present your primary findings, supported by visualizations or summary statistics as appropriate. Discuss the insights gained and any implications or limitations that surfaced during your analysis.
-\item \textbf{Teaching}: Specify the teaching resource or artifact you developed, such as a blog post, demo, or presentation, and identify the intended audience. Explain your approach to breaking down complex concepts and making them accessible, including any visual or interactive elements used. Summarize feedback, audience engagement, or lessons learned from the process of creating educational materials.
-\item \textbf{Application}: Identify the real-world scenario or dataset where you applied your model, and note any modifications necessary to adapt your approach for this context. Provide a concise evaluation of model performance or utility in the new domain, mentioning both strengths and challenges encountered. Reflect on the broader applicability and relevance of your solution in practical settings.
-\item \textbf{Datasets}: Explain the motivation for collecting or curating new data and describe your sourcing and cleaning procedures. Give a brief summary of dataset characteristics, such as size, balance, labeling method, or notable attributes, using figures or tables if helpful. Note any difficulties with data quality and the steps you took to ensure the integrity and reproducibility of the dataset.
+\subsection{Analysis: Political Headline Error Analysis}
+To better understand the remaining limitations of the final headline-only classifier, we analyzed out-of-fold validation errors by topic. Our main question was whether some news domains are systematically harder to classify even when the overall model performs reasonably well. We recreated out-of-fold predictions from the same headline-only feature design used in the final submission and grouped examples into broad topical categories such as politics, world, crime, health, culture, business, and other.
 
-\item \textbf{Comparison}: Analyze the pros and cons of State of the Art methods and how your work benefits from them or addresses their limitations. Use empirical results to compare your work with other SOTA to justify your claim. You don't have to outperform the SOTA methods.
-\end{itemize}
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrr}
+\hline
+Topic & Examples & Errors & Error rate \\
+\hline
+Politics & 1,322 & 253 & 19.14\% \\
+Health & 102 & 17 & 16.67\% \\
+Other & 1,614 & 237 & 14.68\% \\
+World & 372 & 54 & 14.52\% \\
+Crime & 269 & 36 & 13.38\% \\
+Culture & 76 & 9 & 11.84\% \\
+Business & 44 & 5 & 11.36\% \\
+\hline
+\end{tabular}
+\caption{Topic-level error analysis on recreated out-of-fold predictions. Politics was the largest and hardest category.}
+\label{tab:politics-error-analysis}
+\end{table}
+
+The clearest finding is that political headlines are the largest and weakest topic group. Politics produced 253 errors, the highest count of any category, and also had the highest error rate among the major topic groups. Within the political subset, the errors were not strongly one-sided: 140 Fox News headlines were predicted as NBC, while 113 NBC headlines were predicted as Fox News. This suggests that the problem is not simply a badly chosen global threshold. Instead, the model is genuinely confused by political headlines from both outlets.
+
+We found that political headlines are difficult because Fox News and NBC frequently cover the same candidates, institutions, court decisions, and election events. Terms such as \texttt{Trump}, \texttt{Biden}, \texttt{Harris}, \texttt{White House}, \texttt{election}, and \texttt{court} appear often in both sources, so many strong lexical cues are topical rather than source-specific. In addition, some headlines are written in a relatively neutral wire-service style, while others use quotations or conflict framing that are plausible for either outlet. The main insight from this analysis is that the hardest remaining mistakes reflect genuine ambiguity in headline-only source classification rather than a small preprocessing bug or a missing keyword list.
+
+Because political headlines were the hardest category, we ran two follow-up experiments to test whether targeted modeling could reduce these errors. First, we trained a politics specialist on only the political subset and used it as a routed model for political examples. Second, we added handcrafted political metadata features, including indicators for major political figures, institutions, party terms, election terms, and common framing verbs. Neither approach improved performance over the general headline-only model. The politics specialist reduced performance on the political subset, and the enhanced political feature model also lowered both overall accuracy and politics-only accuracy. This negative result is still informative: it suggests that the TF-IDF representation already captures much of the useful lexical and structural signal that these handcrafted features were designed to add. As a result, the extra political features introduced redundancy and noise rather than genuinely new discriminative information. For this reason, we did not include either experimental variant in the final submission model.
+
+\subsection{Technique: Targeted Politics Modeling Experiments}
+Motivated by the error analysis above, we tested two targeted modeling strategies for political headlines. To keep the comparison controlled, we evaluated both methods in the same recreated out-of-fold setting used for the political error analysis pipeline. In that setting, the baseline general headline-only model achieved 0.8392 overall accuracy and 0.8086 accuracy on the political subset.
+
+The first strategy was a politics specialist. We isolated headlines labeled as politics, trained a separate classifier on that subset using the same word TF-IDF, character TF-IDF, and 10 headline style features as the general model, and then routed political examples to this specialist at prediction time. The motivation was that a model trained only on political headlines might learn finer distinctions in campaign language, institutional references, and partisan framing. In practice, the specialist underperformed the general model on the political subset, dropping politics-only accuracy from 0.8086 to 0.7958. A routed system that combined the general model with the politics specialist also reduced overall accuracy to 0.8347. This suggests that narrowing the training data to only political headlines removed useful signal rather than sharpening the decision boundary.
+
+The second strategy was to augment the model with handcrafted political metadata features. In addition to the baseline 10 style features, we added indicators and counts for political figures, institutions, party terms, election vocabulary, framing verbs, and several simple phrase patterns such as \texttt{person + says} or \texttt{White House says}. The goal was to inject domain knowledge that might separate source style from shared political content. However, this version also performed worse: overall accuracy decreased from 0.8392 to 0.8373, and politics-only accuracy decreased from 0.8086 to 0.7995.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lcc}
+\hline
+Method & Overall accuracy & Politics accuracy \\
+\hline
+General headline-only model & 0.8392 & 0.8086 \\
+Routed politics specialist & 0.8347 & 0.7958 \\
+Enhanced political metadata & 0.8373 & 0.7995 \\
+\hline
+\end{tabular}
+\caption{Results of targeted modeling experiments for political headlines in the recreated out-of-fold analysis setting. Neither targeted technique outperformed the general model.}
+\label{tab:politics-technique-results}
+\end{table}
+
+Taken together, these experiments show that the main political error problem was not solved by adding a more specialized classifier or by manually encoding more political vocabulary. The negative result is useful: it indicates that the existing TF-IDF representation already captures much of the accessible surface-level political signal, while the added specialist routing and handcrafted metadata mostly introduced extra variance, redundancy, or noise. For this reason, we kept the simpler general headline-only model as the final submission model.
+
+\subsection{Datasets/Application: Post-January-2026 Pseudo-Hidden Validation}
+In addition to random cross-validation on the starter dataset, we created a separate pseudo-hidden validation set to test temporal generalization under lower overlap risk. The course staff clarified that the leaderboard test set did not include articles scraped during or after January 2026, so we collected newer headlines from official Fox News and NBC News RSS feeds using a cutoff of February 1, 2026. After deduplication and filtering, this validation set contained 393 examples: 213 from Fox News and 180 from NBC News.
+
+The main purpose of this dataset was not to replace the course evaluation protocol, but to stress-test how well our models generalize to newer headlines outside the original starter collection. This setting is useful because random 5-fold cross-validation may still benefit from topical and stylistic overlap within the same source period.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lcc}
+\hline
+Model setting & Accuracy & ROC-AUC \\
+\hline
+Headline-only TF-IDF model & 0.6718 & 0.7134 \\
+Headline + source-stripped URL slug model & 0.9364 & 0.9825 \\
+\hline
+\end{tabular}
+\caption{Results on the post-February-1-2026 pseudo-hidden validation set.}
+\label{tab:recent-validation-results}
+\end{table}
+
+This experiment produced two useful findings. First, the best headline-only model performed much worse on this newer validation set than on random cross-validation, with accuracy dropping to 0.6718. This suggests substantial distribution shift between the starter dataset and newer headlines. Second, adding source-stripped URL slug tokens produced a large improvement on this validation set, reaching 0.9364 accuracy. This indicates that URL-derived information can provide strong extra signal even when direct source-domain tokens are removed.
+
+We treat this result as an exploratory robustness study rather than as the main report result. The final safe submission model remains the headline-only system described in the core components, because that design most directly follows the course backend assumptions and avoids depending on URL-based features. Still, the post-January-2026 validation experiment was valuable because it revealed a clear gap between in-distribution cross-validation and more realistic time-shifted generalization.
 
 \section{Team Contributions}
-Description of the contributions of each team member, e.g., who participated in data collection, who in model design, who in each exploratory direction, who on project report writing, etc. One sentence for each member is sufficient.
+Jerry Li led data collection and preprocessing, including preparation of the cleaned training pipeline.
+
+Jier Yin led model development and evaluation on the main validation settings.
+
+Yikai Ding led the exploratory components and integration of the final project report.
 
 \section{Extra Credit}
-An extra credit of 5\% of the project grade will be awarded if a video demo is submitted along with the report. The video duration should be a maximum of 10 minutes, and all team members must present some part to receive full credit. Please include the link to the video in this section.
+\textbf{Video Demo Link:} \href{https://drive.google.com/drive/folders/13gnLsAkTN4MkBU17H3Kkb2pxDgQ4y-Hy}{Project Code Folder}
 
-\vspace{3em}
-\noindent
-{\bf Page limit:} The main body of the report should be no more than 5 pages, excluding references. You may include additional text, results, or proofs in the appendix. However, ensure that all important findings are included in the main body, as the project grading team will primarily focus on evaluating the main body of the report.
-
-\section{(Optional, not included within 5 page limit) Acknowledgments of help received from outside of the project team}
-
-\section{(Optional, not included within 5 page limit) Suggestions for future iterations of this project}
-
-\section{(Optional, not included within 5 page limit) Plots and appendix}
 
 \end{document}
